@@ -1,0 +1,40 @@
+@model List<Post>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}               
+<div class="container-fluid px-4">
+ <div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-dark py-2">Post List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+    <div class="row pb-3">
+    <div class="col-12 text-end">
+        <a asp-controller="Post" asp-action="Create" class="btn btn-dark">
+           <i class="bi bi-plus-circle"></i> Create New Post
+        </a>
+    </div>
+
+    </div>
+    <table id="tblData" style="width: 100%;" class="table table-bordered table-stripped">
+    <thead>
+        <tr>
+     <th>Title</th>
+   <th>Description</th>
+      <th>Contact Info</th>
+      <th>Image</th>
+      <th>User</th>
+     <th></th>
+    </tr>
+    </thead>
+           </table>
+    </div>
+ </div>
+</div>
+@section Scripts{
+    <script src="~/js/post.js"></script>
+         }
