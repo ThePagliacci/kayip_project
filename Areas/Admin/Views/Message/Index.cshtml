@@ -1,4 +1,3 @@
-@model List<Post>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }               
@@ -7,28 +6,18 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-dark py-2">Post List</h2>
+                <h2 class="text-dark py-2">Message List</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
-    <div class="row pb-3">
-    <div class="col-12 text-end">
-        <a asp-controller="Post" asp-action="Upsert" class="btn btn-dark">
-           <i class="bi bi-plus-circle"></i> Create New Post
-        </a>
-    </div>
-
-    </div>
     <table id="tblData" style="width: 100%;" class="table table-bordered table-stripped">
-    <thead>
+    <thead> 
         <tr>
-     <th>Title</th>
-   <th>Description</th>
-      <th>Contact Info</th>
-      <th>Image</th>
-      <th>User</th>
-     <th></th>
+   <th>Title</th>
+      <th>Message</th> 
+      <th>Sender's Email</th> 
+        <th></th> 
     </tr>
     </thead>
            </table>
@@ -36,5 +25,5 @@
  </div>
 </div>
 @section Scripts{
-    <script src="~/js/post.js"></script>
+    <script src="~/js/message.js"></script>
          }

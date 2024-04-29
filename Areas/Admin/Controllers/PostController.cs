@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using kayip_project.Data;
 using kayip_project.Models;
 using kayip_project.Repository.IRepository;
+using kayip_project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -30,55 +31,32 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
             List<Post> postObj = _unitOfWork.Post.GetAll(includeProperties: "ApplicationUser").ToList();
             return View(postObj);
         }
+
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            IEnumerable<SelectListItem> UsersList = _unitOfWork.ApplicationUser.GetAll().Select(u=> new SelectListItem
+            PostVM postVM = new()
             {
-                Text = u.FName,
-                Value = u.Id.ToString()
-            });
-
-            ViewBag.UserList = UsersList;
-            return View();
-        }
-
-       [HttpPost]
-        public IActionResult Create(Post obj, IFormFile? file)
-        {
-           if(ModelState.IsValid)
-            {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if(file !=null)
+                UserList = _unitOfWork.ApplicationUser.GetAll().Select(u=> new SelectListItem
                 {
-                    string fileName = Guid.NewGuid().ToString()+ Path.GetExtension(file.FileName);
-                    string postPath = Path.Combine(wwwRootPath, @"images\post");
-                    using(var fileStream = new FileStream(Path.Combine(postPath, fileName), FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-                    obj.Image = @"\images\post\" + fileName;
-                }
-                _unitOfWork.Post.Add(obj);
-                _unitOfWork.Save();
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+                    Text = u.FName,
+                    Value = u.Id.ToString()
+                }),
+                Post = new Post()
+            };
+            //create
+             if(id == null || id == 0) return View(postVM);
+             else
+             {
+                //update
+                postVM.Post = _unitOfWork.Post.Get(u => u.Id == id);
+                return View(postVM);
 
-        [HttpGet]
-        public IActionResult Edit(int? id)
-        {
-            if(id == null || id == 0) return NotFound();
-
-            Post? postFromDb = _unitOfWork.Post.Get(u => u.Id == id);
-
-            if(postFromDb == null) return NotFound();
-            return View(postFromDb);
+             }
         }
 
         [HttpPost]
-        public IActionResult Edit(Post post, IFormFile? file)
+        public IActionResult Upsert(PostVM postVM, IFormFile? file)
         {
             if(ModelState.IsValid)
             {
@@ -88,10 +66,10 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
                     string fileName = Guid.NewGuid().ToString()+ Path.GetExtension(file.FileName);
                     string postPath = Path.Combine(wwwRootPath, @"images\post");
 
-                    if(!string.IsNullOrEmpty(post.Image))
+                    if(!string.IsNullOrEmpty(postVM.Post.Image))
                     {
                         //delete old image
-                        var oldImagePath = Path.Combine(wwwRootPath, post.Image.TrimStart('\\'));
+                        var oldImagePath = Path.Combine(wwwRootPath, postVM.Post.Image.TrimStart('\\'));
 
                         if(System.IO.File.Exists(oldImagePath))
                         {
@@ -103,19 +81,26 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
                     {
                         file.CopyTo(fileStream);
                     }
-                    post.Image = @"\images\post\" + fileName;
+                    postVM.Post.Image = @"\images\post\" + fileName;
                 }
-                _unitOfWork.Post.Update(post);
+                if(postVM.Post.Id == 0)
+                {
+                    _unitOfWork.Post.Add(postVM.Post);
+                }
+                else
+                {
+                    _unitOfWork.Post.Update(postVM.Post);
+                }
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
-            }  
-            return View();          
+            }
+            return View();
         }
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Post> postObj = _unitOfWork.Post.GetAll().ToList();
+            List<Post> postObj = _unitOfWork.Post.GetAll(includeProperties: "ApplicationUser").ToList();
             return Json(new {data = postObj });
         }
 
@@ -140,6 +125,7 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
 
             return Json(new { success = true, message = "Deleted Successfully"});
         }
+        
         #endregion
     }
 }

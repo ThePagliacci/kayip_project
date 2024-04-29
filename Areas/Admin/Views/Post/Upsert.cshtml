@@ -1,4 +1,4 @@
-@model Post
+@model PostVM
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }               
@@ -8,47 +8,50 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12  text-center">
-                <h2 class="text-dark py-2">Create Post</h2>
+                <h2 class="text-dark py-2">@(Model.Post.Id != 0? "Update": "Create") Post</h2>
             </div>
         </div
-    </div>
+     </div>
         </div>
 
     <div class="card-body p-4">
     <form method="post" class="row" enctype="multipart/form-data">
+    <input asp-for="Post.Id" hidden>
+    <input asp-for="Post.Image" hidden>
     <div class="border p-3">
         <div class="form-floating py-2 col-12">
-            <input asp-for="Title" class="form-control border-0 shadow">
-            <label asp-for="Title" class="ms-2"></label>
-            <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Post.Title" class="form-control border-0 shadow">
+            <label asp-for="Post.Title" class="ms-2"></label>
+            <span asp-validation-for="Post.Title" class="text-danger"></span>
         </div>
 
 <div class="py-2 col-12">
-        <label asp-for="Description" class="ms-2 text-muted"></label>
-    <textarea asp-for="Description" class="form-control border-0 shadow"></textarea>
+        <label asp-for="Post.Description" class="ms-2 text-muted"></label>
+    <textarea asp-for="Post.Description" class="form-control border-0 shadow"></textarea>
 </div>
 
             <div class="form-floating py-2 col-12">
-            <input asp-for="ContactInfo" class="form-control border-0 shadow">
-            <label asp-for="ContactInfo" class="ms-2"></label>
-             <span asp-validation-for="ContactInfo" class="text-danger"></span>
+            <input asp-for="Post.ContactInfo" class="form-control border-0 shadow">
+            <label asp-for="Post.ContactInfo" class="ms-2"></label>
+             <span asp-validation-for="Post.ContactInfo" class="text-danger"></span>
         </div>
 
             <div class="form-floating py-2 col-12">
-            <select asp-for="ApplicationUserId" asp-items="ViewBag.UserList" class="form-select border-0 shadow">
+            <select asp-for="@Model.Post.ApplicationUserId" asp-items="@Model.UserList" class="form-select border-0 shadow">
                 <option disabled selected>Select User</option>
             </select>
-            <label asp-for="ApplicationUserId" class="ms-2"></label>
-             <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
+            <label asp-for="Post.ApplicationUserId" class="ms-2"></label>
+             <span asp-validation-for="Post.ApplicationUserId" class="text-danger"></span>
             </div>
 
              <div class="form-floating py-2 col-12">
             <input type="file" name="file" class="form-control border-0 shadow">
-            <label asp-for="Image" class="ms-2"></label>
+            <label asp-for="Post.Image" class="ms-2"></label>
         </div>
         <div class="row pt-2">
             <div class="col-6 col-md-3">
-        <button type="submit" class="btn btn-dark form-control">Create</button>
+                
+        <button type="submit" class="btn btn-dark form-control">@(Model.Post.Id != 0? "Update": "Create")</button>
             </div>
             <div class="col-6 col-md-3">
         <a asp-controller="Post" asp-action="Index" class="btn btn-outline-primary border form-control">Back to List</a>

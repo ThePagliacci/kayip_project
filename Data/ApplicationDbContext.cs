@@ -18,6 +18,7 @@ namespace kayip_project.Data
         //creating table
         public DbSet<Post> Posts { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

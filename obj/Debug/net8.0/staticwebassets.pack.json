@@ -85,6 +85,14 @@
       "PackagePath": "staticwebassets\\images\\post\\8dfffad1-2b78-45b8-a953-58481aad2353.png"
     },
     {
+      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\ae2556e7-ade1-4351-aece-2c9c14c7e0ce.png",
+      "PackagePath": "staticwebassets\\images\\post\\ae2556e7-ade1-4351-aece-2c9c14c7e0ce.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\message.js",
+      "PackagePath": "staticwebassets\\js\\message.js"
+    },
+    {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\post.js",
       "PackagePath": "staticwebassets\\js\\post.js"
     },

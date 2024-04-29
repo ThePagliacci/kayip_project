@@ -13,10 +13,12 @@ namespace kayip_project.Repository
         private ApplicationDbContext _db;
         public IPostRepository Post {get; private set;}
         public IApplicationUserRepository ApplicationUser {get; private set;}
+        public IMessageRepository Message {get; private set;}
         public UnitOfWork(ApplicationDbContext db)
         {
             _db= db;
             Post = new PostRepository(_db);
+            Message = new MessageRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
         }
         public void Save()

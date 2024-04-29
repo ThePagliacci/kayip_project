@@ -5,33 +5,28 @@ $(document).ready(function () {
 
 function LoadDataTable() {
   dataTable = $('#tblData').DataTable({
-    ajax:{ url: '/admin/post/getall'},
+    ajax:{ url: '/admin/message/getall'},
     columns: [
-    { data: 'title', width: "15%"},
-    { data: 'description', width: "15%"},
-    { data: 'contactInfo', width: "15%"},
-    { data: 'image',
-    render: function (data) {
-      return '<img src="' + data + '" style="width:100%;" />';
-    },
-      width: "25%"},
-    { data: 'applicationUser.email', width: "15%"},
+    { data: 'subject', width: "25%"},
+    { data: 'body', width: "25%"},
+    { data: 'name', width: "25%"},
     {
       data: 'id',
       render: function (data) {
         return (
-          "<div class='w-75 btn-group' role='group'><a href='/admin/post/upsert?id=" +
+          "<div class='w-75 btn-group' role='group'><a href='/admin/message/Edit?id=" +
           data +
-          "'class='btn btn-primary mx-2'><i class='bi bi-pencil-square'></i>Edit</a><a onClick=Delete('/admin/post/delete?id=" +
+          "'class='btn btn-primary mx-2'><i class='bi bi-pencil-square'></i>Edit</a><a onClick=Delete('/admin/message/delete?id=" +
           data +
           "') class='btn btn-danger mx-2'><i class='bi bi-trash-fill'><i>Delete</a></div>"
         );
       },
-      width: "15%",
+      width: "25%",
     },
   ],
 });
 }
+
 function Delete(url) {
   Swal.fire({
     title: "Are you sure?",

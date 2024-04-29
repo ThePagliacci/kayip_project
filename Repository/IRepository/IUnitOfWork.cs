@@ -9,6 +9,7 @@ namespace kayip_project.Repository.IRepository
     {
         IPostRepository Post{get;}
         IApplicationUserRepository ApplicationUser{get;}
+        IMessageRepository Message{get;}
         void Save();
     }
 }

@@ -244,6 +244,7 @@ C:\Users\hp\kayip_project\obj\Debug\net8.0\kayip_project.MvcApplicationPartsAsse
 C:\Users\hp\kayip_project\obj\Debug\net8.0\kayip_project.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\hp\kayip_project\obj\Debug\net8.0\kayip_project.RazorAssemblyInfo.cache
 C:\Users\hp\kayip_project\obj\Debug\net8.0\kayip_project.RazorAssemblyInfo.cs
+C:\Users\hp\kayip_project\obj\Debug\net8.0\kayip_project.sourcelink.json
 C:\Users\hp\kayip_project\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\hp\kayip_project\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\hp\kayip_project\obj\Debug\net8.0\staticwebassets\msbuild.kayip_project.Microsoft.AspNetCore.StaticWebAssets.props
