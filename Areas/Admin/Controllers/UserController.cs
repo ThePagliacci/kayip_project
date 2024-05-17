@@ -107,6 +107,12 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
                 return Json(new {success = false, message = "Error while deleting post"});
             }
 
+            //removing the user's role
+            string RoleID = _db.UserRoles.FirstOrDefault(u=> u.UserId == id).RoleId;
+            string Role = _db.Roles.FirstOrDefault(u=>u.Id == RoleID).Name;
+            _userManager.RemoveFromRoleAsync(userToBeDeleted, Role).GetAwaiter().GetResult();
+
+             //removing the user
             _userManager.DeleteAsync(userToBeDeleted).GetAwaiter().GetResult();
 
             return Json(new { success = true, message = "Deleted Successfully"});

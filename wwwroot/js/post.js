@@ -15,7 +15,7 @@ function LoadDataTable() {
       return '<img src="' + data + '" style="width:100%;" />';
     },
       width: "25%"},
-    { data: 'applicationUser.email', width: "15%"},
+    { data: 'applicationUser', width: "15%"},
     {
       data: 'id',
       render: function (data) {

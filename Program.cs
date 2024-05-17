@@ -6,8 +6,20 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using kayip_project.Repository.IRepository;
 using kayip_project.Repository;
+using Microsoft.AspNetCore.Authentication.Google;
+using kayip_project.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//google auth 
+
+var services = builder.Services;
+var configuration = builder.Configuration;
+services.AddAuthentication().AddGoogle(GoogleOptions =>
+{
+    GoogleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+    GoogleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

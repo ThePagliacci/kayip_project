@@ -1,6 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
+#nullable disable 
 
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using kayip_project.Models;
+using kayip_project.Utility;
 
 namespace kayip_project.Areas.Identity.Pages.Account
 {
@@ -84,6 +86,13 @@ namespace kayip_project.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            [Required]
+            public string FName { get; set; }
+            [Required]
+            public string LName { get; set; }
+            public string? City { get; set; }
+            public string? District { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -131,7 +140,9 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        FName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
+                        LName = info.Principal.FindFirstValue(ClaimTypes.Surname)
                     };
                 }
                 return Page();
@@ -155,10 +166,16 @@ namespace kayip_project.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.FName = Input.FName;
+                user.LName = Input.LName;
+                user.City = Input.City;
+                user.District = Input.District;
+
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, SD.User_Role);
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
@@ -197,11 +214,11 @@ namespace kayip_project.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {
