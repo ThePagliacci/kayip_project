@@ -10,6 +10,7 @@ using kayip_project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using System.Text.RegularExpressions;
 
 namespace kayip_project.Areas.Admin.Controllers.Admin
 {
@@ -70,8 +71,10 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
                     {
                         //delete old image
                         var oldImagePath = Path.Combine(wwwRootPath, postVM.Post.Image.TrimStart('\\'));
+                        string fullPath = Path.GetFullPath(oldImagePath);
+                        string pattern = "^" + Regex.Escape(wwwRootPath) + @"(?:\\|/|$)";
 
-                        if(System.IO.File.Exists(oldImagePath))
+                        if (Regex.IsMatch(fullPath, pattern, RegexOptions.IgnoreCase) && System.IO.File.Exists(oldImagePath))
                         {
                             System.IO.File.Delete(oldImagePath);
                         }
@@ -96,6 +99,7 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
             }
             return View();
         }
+        
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll()
