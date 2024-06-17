@@ -77,9 +77,8 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
-                Input.Email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                Input.Email,"E-postanızı onaylayın",
+                        $"<!DOCTYPE html><html><body style='text-align: center;'><h1>Yeni Kullanıcıyı Hoş Geldiniz</h1><p>Lütfen aşağidaki̇ bağlantiya tiklayarak e-posta adresi̇ni̇zi̇ onaylayin, böylece web si̇tesi̇ne rahatça gi̇ri̇ş yapabi̇li̇r ve en son yayinlar i̇çi̇n taki̇pte kalabi̇li̇rsi̇ni̇z.</p><a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Buraya Tıklayın</a></body></html>");
 
             ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
             return Page();

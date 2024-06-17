@@ -4,6 +4,8 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -20,11 +22,13 @@ namespace kayip_project.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IConfiguration _configuration;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender, IConfiguration configuration)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -70,15 +74,48 @@ namespace kayip_project.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
+                await SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Şifre Yenile",
+                    $"<!DOCTYPE html><html><body style='text-align: center;'><h1>Şifre Yineleme</h1><p>Lütfen <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>buraya tıklayarak</a> şifrenizi Yinleleyin</p></body></html>");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
             return Page();
+        }
+
+        private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink)
+        {
+            var emailUsername = _configuration["Email:Username"];
+            var emailPassword = _configuration["Email:Password"];
+
+            try 
+            { 
+
+                MailMessage message = new MailMessage();
+                SmtpClient smtpClient = new SmtpClient();
+                message.From = new MailAddress(emailUsername);
+                message.To.Add(email);
+                message.Subject = subject; 
+                message.IsBodyHtml = true;
+                message.Body = confirmLink;
+                smtpClient.Host = "smtp.gmail.com";
+                smtpClient.Port= 587;
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                NetworkCredential nc = new NetworkCredential(emailUsername, emailPassword);
+                smtpClient.Credentials = nc;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.Send(message);
+
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+
         }
     }
 }

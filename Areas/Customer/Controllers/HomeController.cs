@@ -12,10 +12,12 @@ namespace kayip_projectA.Areas.Customer.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IConfiguration _configuration;
     private readonly IUnitOfWork _unitOfWork;
 
-    public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+    public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, IConfiguration configuration)
     {
+        _configuration = configuration;
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
@@ -31,37 +33,35 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult ContactUs(Message message)
-    {
-        if(ModelState.IsValid)
+        public async Task<ActionResult> ContactUs(Message message)
         {
-            MailMessage mail = new MailMessage("boshra.khaled@outlook.sa", "boshra.khaled@outlook.sa");
-            mail.Subject = message.Subject;
-            mail.Body = "User Email: " +  message.Name +"<br>User Massage: "+ message.Body;
-            mail.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.office365.com";
-            smtp.Port= 587;
-            smtp.EnableSsl = true;
+            var emailUsername = _configuration["Email:Username"];
+            var emailPassword = _configuration["Email:Password"];
+            if(ModelState.IsValid)
+            {
+                MailMessage mail = new MailMessage(message.Name, emailUsername);
+                mail.Subject = "Contact Us Message!!";
+                mail.Body ="User Email: " +  message.Name +"<br>User Massage: "+ message.Subject +"<br>" + message.Body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host =  "smtp.gmail.com";
+                smtp.Port= 587;
+                smtp.EnableSsl = true;
 
-            NetworkCredential nc = new NetworkCredential("boshra.khaled@outlook.sa", "boshraROKAYA");
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = nc;
-            smtp.Send(mail);
+                NetworkCredential nc = new NetworkCredential(emailUsername, emailPassword);
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-            _unitOfWork.Message.Add(message);
-            _unitOfWork.Save();
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = nc;
+                smtp.Send(mail);
 
-            ViewBag.Message = "Mail sent successfully";
-            ModelState.Clear();
-            return View();
+                _unitOfWork.Message.Add(message);
+                _unitOfWork.Save();
+
+                ViewBag.Message = "Mail sent successfully";
+                ModelState.Clear();
+                return View();
+            }
+                return View("index");
         }
-        return View("index");
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
 }

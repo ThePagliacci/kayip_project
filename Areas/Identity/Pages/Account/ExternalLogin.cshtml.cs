@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using kayip_project.Models;
 using kayip_project.Utility;
+using System.Net.Mail;
+using System.Net;
 
 namespace kayip_project.Areas.Identity.Pages.Account
 {
@@ -31,13 +33,15 @@ namespace kayip_project.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private readonly IConfiguration _configuration;
 
         public ExternalLoginModel(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IConfiguration configuration)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -45,6 +49,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _logger = logger;
             _emailSender = emailSender;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -119,6 +124,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 ErrorMessage = "Error loading external login information.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
+            //
 
             // Sign in the user with this external login provider if the user already has a login.
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
@@ -148,7 +154,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 return Page();
             }
         }
-
+ 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -190,8 +196,8 @@ namespace kayip_project.Areas.Identity.Pages.Account
                             values: new { area = "Identity", userId = userId, code = code },
                             protocol: Request.Scheme);
 
-                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        await SendEmailAsync(Input.Email, "E-postanızı onaylayın",
+                        $"<!DOCTYPE html><html><body style='text-align: center;'><h1>Yeni Kullanıcıyı Hoş Geldiniz</h1><p>Lütfen aşağidaki̇ bağlantiya tiklayarak e-posta adresi̇ni̇zi̇ onaylayin, böylece web si̇tesi̇ne rahatça gi̇ri̇ş yapabi̇li̇r ve en son yayinlar i̇çi̇n taki̇pte kalabi̇li̇rsi̇ni̇z.</p><a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Buraya Tıklayın</a></body></html>");
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -227,6 +233,38 @@ namespace kayip_project.Areas.Identity.Pages.Account
                     $"override the external login page in /Areas/Identity/Pages/Account/ExternalLogin.cshtml");
             }
         }
+
+        private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink)
+        {
+            var emailUsername = _configuration["Email:Username"];
+            var emailPassword = _configuration["Email:Password"];
+            try
+            {
+                MailMessage message = new MailMessage();
+                SmtpClient smtpClient = new SmtpClient();
+                message.From = new MailAddress(emailUsername);
+                message.To.Add(email);//?
+                message.Subject = subject;
+                message.IsBodyHtml = true; 
+                message.Body = confirmLink;
+                smtpClient.Host = "smtp.gmail.com";
+                smtpClient.Port= 587;
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                NetworkCredential nc = new NetworkCredential(emailUsername, emailPassword);
+                smtpClient.Credentials = nc;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.Send(message);
+
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+
+        }
+
 
         private IUserEmailStore<IdentityUser> GetEmailStore()
         {
