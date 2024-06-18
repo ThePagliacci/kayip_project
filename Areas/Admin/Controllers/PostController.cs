@@ -57,62 +57,50 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
         }
 
         [HttpPost]
-        public IActionResult Upsert(PostVM postVM, IFormFile? file)
+    public IActionResult Upsert(PostVM postVM, IFormFile? file)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            if (file != null)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null)
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                string postPath = Path.Combine(wwwRootPath, "images", "post");
+
+                if (!string.IsNullOrEmpty(postVM.Post.Image))
                 {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string postPath = Path.Combine(wwwRootPath, @"images\post");
+                    string sanitizedImagePath = Regex.Replace(postVM.Post.Image, @"\.\.[\\/]", string.Empty);
+                    string oldImagePath = Path.Combine(wwwRootPath, sanitizedImagePath);
 
-                    if (!string.IsNullOrEmpty(postVM.Post.Image))
+                    if (Path.GetFullPath(oldImagePath).StartsWith(wwwRootPath, StringComparison.OrdinalIgnoreCase))
                     {
-                        // Get the full path of the old image
-                        string oldImagePath = Path.Combine(wwwRootPath, postVM.Post.Image.TrimStart('\\'));
-
-                        // Ensure the path is within the wwwRootPath to prevent path traversal
-                        if (IsPathSafe(wwwRootPath, oldImagePath))
+                        var fileInfo = new System.IO.FileInfo(oldImagePath);
+                        if (fileInfo.Exists)
                         {
-                            if (System.IO.File.Exists(oldImagePath))
-                            {
-                                System.IO.File.Delete(oldImagePath);
-                            }
+                            fileInfo.Delete();
                         }
                     }
+                }
 
-                    using (var fileStream = new FileStream(Path.Combine(postPath, fileName), FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-                    postVM.Post.Image = @"\images\post\" + fileName;
-                }
-                if (postVM.Post.Id == 0)
+                using (var fileStream = new FileStream(Path.Combine(postPath, fileName), FileMode.Create))
                 {
-                    _unitOfWork.Post.Add(postVM.Post);
+                    file.CopyTo(fileStream);
                 }
-                else
-                {
-                    _unitOfWork.Post.Update(postVM.Post);
-                }
-                _unitOfWork.Save();
-                return RedirectToAction("Index");
+                postVM.Post.Image = Path.Combine("images", "post", fileName).Replace("\\", "/");
             }
-            return View(postVM);
+            if (postVM.Post.Id == 0)
+            {
+                _unitOfWork.Post.Add(postVM.Post);
+            }
+            else
+            {
+                _unitOfWork.Post.Update(postVM.Post);
+            }
+            _unitOfWork.Save();
+            return RedirectToAction("Index");
         }
-
-    private bool IsPathSafe(string rootPath, string filePath)
-    {
-        string fullPath = Path.GetFullPath(filePath);
-
-        // Create a regular expression to match paths within the rootPath directory
-        string escapedRootPath = Regex.Escape(rootPath);
-        string pattern = @"^" + escapedRootPath + @"(?:\\|/|$)";
-
-        return Regex.IsMatch(fullPath, pattern, RegexOptions.IgnoreCase);
+        return View(postVM);
     }
-
         
         #region API CALLS
         [HttpGet]
