@@ -54,7 +54,7 @@
             },
             "Microsoft.DotNet.Watcher.Tools": {
               "target": "Package",
-              "version": "[2.0.2, )"
+              "version": "[*, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",

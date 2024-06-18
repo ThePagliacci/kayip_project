@@ -9204,7 +9204,7 @@
       "Microsoft.AspNetCore.Authentication.Google >= 8.0.5",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.4",
       "Microsoft.AspNetCore.Identity.UI >= 8.0.4",
-      "Microsoft.DotNet.Watcher.Tools >= 2.0.2",
+      "Microsoft.DotNet.Watcher.Tools >= *",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.6",
       "Microsoft.EntityframeworkCore >= 8.0.4",
@@ -9265,7 +9265,7 @@
           },
           "Microsoft.DotNet.Watcher.Tools": {
             "target": "Package",
-            "version": "[2.0.2, )"
+            "version": "[*, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
