@@ -57,50 +57,50 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
         }
 
         [HttpPost]
-    public IActionResult Upsert(PostVM postVM, IFormFile? file)
-    {
-        if (ModelState.IsValid)
+        public IActionResult Upsert(PostVM postVM, IFormFile? file)
         {
-            string wwwRootPath = _webHostEnvironment.WebRootPath;
-            if (file != null)
+            if (ModelState.IsValid)
             {
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                string postPath = Path.Combine(wwwRootPath, "images", "post");
-
-                if (!string.IsNullOrEmpty(postVM.Post.Image))
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
                 {
-                    string sanitizedImagePath = Regex.Replace(postVM.Post.Image, @"\.\.[\\/]", string.Empty);
-                    string oldImagePath = Path.Combine(wwwRootPath, sanitizedImagePath);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string postPath = Path.Combine(wwwRootPath, "images", "post");
 
-                    if (Path.GetFullPath(oldImagePath).StartsWith(wwwRootPath, StringComparison.OrdinalIgnoreCase))
+                    if (!string.IsNullOrEmpty(postVM.Post.Image))
                     {
-                        var fileInfo = new System.IO.FileInfo(oldImagePath);
-                        if (fileInfo.Exists)
+                        string sanitizedImagePath = Regex.Replace(postVM.Post.Image, @"\.\.[\\/]", string.Empty);
+                        string oldImagePath = Path.Combine(wwwRootPath, sanitizedImagePath);
+
+                        if (Path.GetFullPath(oldImagePath).StartsWith(wwwRootPath, StringComparison.OrdinalIgnoreCase))
                         {
-                            fileInfo.Delete();
+                            var fileInfo = new System.IO.FileInfo(oldImagePath);
+                            if (fileInfo.Exists)
+                            {
+                                fileInfo.Delete();
+                            }
                         }
                     }
-                }
 
-                using (var fileStream = new FileStream(Path.Combine(postPath, fileName), FileMode.Create))
-                {
-                    file.CopyTo(fileStream);
+                    using (var fileStream = new FileStream(Path.Combine(postPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    postVM.Post.Image = Path.Combine("images", "post", fileName).Replace("\\", "/");
                 }
-                postVM.Post.Image = Path.Combine("images", "post", fileName).Replace("\\", "/");
+                if (postVM.Post.Id == 0)
+                {
+                    _unitOfWork.Post.Add(postVM.Post);
+                }
+                else
+                {
+                    _unitOfWork.Post.Update(postVM.Post);
+                }
+                _unitOfWork.Save();
+                return RedirectToAction("Index");
             }
-            if (postVM.Post.Id == 0)
-            {
-                _unitOfWork.Post.Add(postVM.Post);
-            }
-            else
-            {
-                _unitOfWork.Post.Update(postVM.Post);
-            }
-            _unitOfWork.Save();
-            return RedirectToAction("Index");
+            return View(postVM);
         }
-        return View(postVM);
-    }
         
         #region API CALLS
         [HttpGet]
