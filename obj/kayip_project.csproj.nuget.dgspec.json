@@ -68,7 +68,7 @@
             },
             "Microsoft.EntityframeworkCore": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",

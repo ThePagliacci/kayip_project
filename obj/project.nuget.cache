@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "Lh45shZtiFMauIychfrLmffoHD52tp0jeHNa8fGVXviMfaOWBFptr8gTZ9Ln0sa5ws6js6mng747Cp0dt81N4A==",
-  "success": false,
+  "dgSpecHash": "pLDX0WRRCsgZiBDD1WDwxJbDoW7hMmv9teo5AOWaiCFKJUdLN8hmKVc1ckq+val2XR2f3veMm6JFYWgXG9sGhQ==",
+  "success": true,
   "projectFilePath": "C:\\Users\\hp\\kayip_project\\kayip_project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hp\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
@@ -82,9 +82,9 @@
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.diasymreader\\2.0.0\\microsoft.diasymreader.2.0.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.dotnet.scaffolding.shared\\8.0.2\\microsoft.dotnet.scaffolding.shared.8.0.2.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.dotnet.watcher.tools\\2.0.2\\microsoft.dotnet.watcher.tools.2.0.2.nupkg.sha512",
-    "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
-    "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
-    "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.4\\microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.6\\microsoft.entityframeworkcore.8.0.6.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.6\\microsoft.entityframeworkcore.abstractions.8.0.6.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.6\\microsoft.entityframeworkcore.analyzers.8.0.6.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.6\\microsoft.entityframeworkcore.design.8.0.6.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.6\\microsoft.entityframeworkcore.relational.8.0.6.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\8.0.4\\microsoft.entityframeworkcore.sqlserver.8.0.4.nupkg.sha512",
@@ -179,15 +179,5 @@
     "C:\\Users\\hp\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore from 8.0.6 to 8.0.4. Reference the package directly from the project to select a different version. \r\n kayip_project -> Microsoft.EntityFrameworkCore.Tools 8.0.6 -> Microsoft.EntityFrameworkCore.Design 8.0.6 -> Microsoft.EntityFrameworkCore.Relational 8.0.6 -> Microsoft.EntityFrameworkCore (>= 8.0.6) \r\n kayip_project -> Microsoft.EntityFrameworkCore (>= 8.0.4)",
-      "libraryId": "Microsoft.EntityFrameworkCore",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }
