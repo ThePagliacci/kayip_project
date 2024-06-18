@@ -8,6 +8,7 @@ using kayip_project.Repository.IRepository;
 using kayip_project.Repository;
 using Microsoft.AspNetCore.Authentication.Google;
 using kayip_project.Models;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,12 @@ builder.Services.AddHttpsRedirection(options =>
 {
     options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
     options.HttpsPort = 7003; // Ensure this matches your HTTPS port in launchSettings.json
+});
+
+//ValidateAntiForgeryToken
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 });
 
 
