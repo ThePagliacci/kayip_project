@@ -31,7 +31,6 @@ C:\Users\hp\kayip_project\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
 C:\Users\hp\kayip_project\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
 C:\Users\hp\kayip_project\bin\Debug\net8.0\Microsoft.DiaSymReader.dll
 C:\Users\hp\kayip_project\bin\Debug\net8.0\Microsoft.DotNet.Scaffolding.Shared.dll
-C:\Users\hp\kayip_project\bin\Debug\net8.0\dotnet-watch.dll
 C:\Users\hp\kayip_project\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\hp\kayip_project\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\hp\kayip_project\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
@@ -262,3 +261,4 @@ C:\Users\hp\kayip_project\obj\Debug\net8.0\refint\kayip_project.dll
 C:\Users\hp\kayip_project\obj\Debug\net8.0\kayip_project.pdb
 C:\Users\hp\kayip_project\obj\Debug\net8.0\kayip_project.genruntimeconfig.cache
 C:\Users\hp\kayip_project\obj\Debug\net8.0\ref\kayip_project.dll
+C:\Users\hp\kayip_project\bin\Debug\net8.0\System.ClientModel.dll
