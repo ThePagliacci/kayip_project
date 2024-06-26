@@ -1,1 +1,5 @@
 1- when deploying the website (google) authorized redirect url should be updated
+
+2- apply prove you are not a robot 
+3- work on the login regestration routing
+4- login registertation and confiramtion other pages frontend redo
