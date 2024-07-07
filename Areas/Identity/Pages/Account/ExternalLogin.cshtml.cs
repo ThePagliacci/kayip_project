@@ -115,13 +115,13 @@ namespace kayip_project.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
+                ErrorMessage = $"Dış sağlayıcıdan gelen hata: {remoteError}";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information.";
+                ErrorMessage = "Dış giriş bilgileri yüklenirken hata oluşmuştur.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
             //
@@ -130,7 +130,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
-                _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+                _logger.LogInformation("{Name}, {LoginProvider} sağlayıcısı ile oturum açtı.", info.Principal.Identity.Name, info.LoginProvider);
                 return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)
@@ -162,7 +162,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information during confirmation.";
+                ErrorMessage = "Onaylama sırasında dış giriş bilgileri yüklenirken hata oluştu.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -185,7 +185,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
-                        _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                        _logger.LogInformation("Kullanıcı {Name} sağlayıcısını kullanarak bir hesap oluşturdu.", info.LoginProvider);
 
                         var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -197,7 +197,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
                             protocol: Request.Scheme);
 
                         await SendEmailAsync(Input.Email, "E-postanızı onaylayın",
-                        $"<!DOCTYPE html><html><body style='text-align: center;'><h1>Yeni Kullanıcıyı Hoş Geldiniz</h1><p>Lütfen aşağidaki̇ bağlantiya tiklayarak e-posta adresi̇ni̇zi̇ onaylayin, böylece web si̇tesi̇ne rahatça gi̇ri̇ş yapabi̇li̇r ve en son yayinlar i̇çi̇n taki̇pte kalabi̇li̇rsi̇ni̇z.</p><a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Buraya Tıklayın</a></body></html>");
+                        $"<!DOCTYPE html><html><body style='text-align: center;'><h1>Yeni Kullanıcıyı Hoş Geldiniz</h1><p>Lütfen aşağidaki̇ bağlantiya tiklayarak e-posta adresi̇ni̇zi̇ onaylayin, böylece web si̇tesi̇ne rahatça gi̇ri̇ş yapabi̇li̇r ve en son yayinlar i̇çi̇n taki̇pte kalabi̇li̇rsi̇ni̇z.</p><a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Buraya  Tıklayın</a></body></html>");
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -228,9 +228,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                    $"override the external login page in /Areas/Identity/Pages/Account/ExternalLogin.cshtml");
+                throw new InvalidOperationException($"'{nameof(IdentityUser)}' örneği oluşturulamıyor. " +$"{nameof(IdentityUser)}' öğesinin soyut bir sınıf olmadığından ve parametresiz bir kurucuya sahip olduğundan emin olun veya alternatif olarak " +$"/Areas/Identity/Pages/Account/ExternalLogin.cshtml içindeki harici oturum açma sayfasını geçersiz kılın");
             }
         }
 
@@ -270,7 +268,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
         {
             if (!_userManager.SupportsUserEmail)
             {
-                throw new NotSupportedException("The default UI requires a user store with email support.");
+                throw new NotSupportedException("Standart kullanıcı arayüzü e-posta destekli bir kullanıcı belleği gerektirir.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
         }

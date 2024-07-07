@@ -37,20 +37,20 @@
               </div>
           <div class="col-md-2 d-none d-md-block">
             <h3>
-              <a href="ikincisayfa.html">
+              <a asp-area="Customer" asp-action="Help">
                 Nasıl yardımcı olabilirim?
               </a></h3>
             </p>
           </div>
           <div class="col-md-2 d-none d-md-block">
-            <h3><a href="ucunusayfa.html">
+            <h3><a asp-area="Customer" asp-action="WhatToDo">
               ne yapmalıyım?
           </a></h3>
           </div>
              @if(User.IsInRole(SD.Admin_Role))
             {
             <div class="col-md-2 d-none d-md-block">
-            <h3><a href="ucunusayfa.html">
+            <h3><a asp-area="Admin" asp-controller="DashBoard" asp-action="Index">
               Admin Panel
           </a></h3>
           </div>
@@ -83,29 +83,23 @@
         </main>
     </div>
 
-    <!-- ======= Footer ======= -->
-    <footer class="footer" role="contentinfo">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <p class="mb-1">
-              &copy; Copyright MyPortfolio. All Rights Reserved
-            </p>
-            <div class="credits">
-              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-          </div>
-          <div class="col-sm-6 social text-md-end">
-            <a href="#"><span class="bi bi-envelope"></span></a>
-          </div>
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="mb-1">
+            &copy; Copyright MyPortfolio. All Rights Reserved
+          </p>
+        </div>
+        <div class="col-sm-6 social text-md-end">
+          <a asp-area="Customer" asp-action="ContactUs"><span class="bi bi-envelope"></span></a>
         </div>
       </div>
-    </footer>
-
+    </div>
+  </footer>
+  <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
             @await RenderSectionAsync("Scripts", required: false)
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <!-- Vendor JS Files -->
     <script src="~/assets/vendor/aos/aos.js"></script>
     <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

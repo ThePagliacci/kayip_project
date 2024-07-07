@@ -1,25 +1,29 @@
 ﻿@page
 @model ResendEmailConfirmationModel
 @{
-    ViewData["Title"] = "Resend email confirmation";
+    ViewData["Title"] = "E-posta onayını yeniden gönderme";
 }
-
-<h1>@ViewData["Title"]</h1>
-<h2>Enter your email.</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+ 
+<section class="section pb-5" style="margin-bottom: 14%;">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+                <div class="col-md-6" data-aos="fade-up">
+            <h2>@ViewData["Title"]</h2>
         <form method="post">
             <div asp-validation-summary="All" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email" class="form-label"></label>
+                <div class="col-md-12 form-group mb-3 mt-5">
+                 <label asp-for="Input.Email" class="form-label"></label>
+                <input asp-for="Input.Email" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Resend</button>
+            <div class="col-md-10 m-8 d-flex flex-column align-items-center center-button">
+            <button type="submit" class="readmore w-75 mb-3">yeniden gönder</button>
+            </div>
         </form>
-    </div>
-</div>
+        </div>
+        </div>
+   </div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -97,7 +97,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "{0} en az {2} ve en fazla {1} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -108,7 +108,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Şifre ve onay şifresi eşleşmiyor.")]
             public string ConfirmPassword { get; set; }
 
             public string? Role { get; set; }
@@ -164,7 +164,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturmuştur.");
 
                     if(String.IsNullOrEmpty(Input.Role))
                     {
@@ -248,9 +248,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+                throw new InvalidOperationException($"'{nameof(IdentityUser)}' örneği oluşturulamıyor. " + $"{nameof(IdentityUser)}' öğesinin soyut bir sınıf olmadığından ve parametresiz bir kurucuya sahip olduğundan emin olun veya alternatif olarak " + $"/Areas/Identity/Pages/Account/Register.cshtml içindeki kayıt sayfasını geçersiz kılın");
             }
         }
 
@@ -258,7 +256,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
         {
             if (!_userManager.SupportsUserEmail)
             {
-                throw new NotSupportedException("The default UI requires a user store with email support.");
+                throw new NotSupportedException("Standart kullanıcı arayüzü e-posta destekli bir kullanıcı belleği gerektirir.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
         }

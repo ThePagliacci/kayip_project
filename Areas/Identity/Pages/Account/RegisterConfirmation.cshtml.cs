@@ -55,7 +55,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                return NotFound($"Unable to load user with email '{email}'.");
+                return NotFound($"E-posta '{email}' ile kullanıcı yüklenemiyor.");
             }
 
             Email = email;

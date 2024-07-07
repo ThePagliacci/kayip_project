@@ -27,6 +27,15 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Help()
+    {
+        return View();
+    }
+    public IActionResult WhatToDo()
+    {
+        return View();
+    }
+
     public IActionResult ContactUs()
     {
         return View(); 
