@@ -49,19 +49,22 @@
             </div> 
             <div class="col-md-12 form-group">
                 <label asp-for="Input.Password">Şifre</label>
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"/>
+                <input id="password" asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"/>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="col-md-12 form-group">
                <label asp-for="Input.ConfirmPassword">Şifre Onaylama</label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true"/>
+                <input id="passwordtekrar" asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true"/>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="col-md-12 form-group">
-                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select"></select>
+                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                    <option disabled selected>- select a role -</option>
+                </select>
             </div>
+            
             <div class="col-md-10 m-8 d-flex flex-column align-items-center center-button">
-            <button id="registerSubmit" type="submit" class="readmore w-75 mb-3">Register</button>
+            <button id="registerSubmit" type="submit" class="readmore w-75 mb-3">Kayıt Ol</button>
           </div>
            </div>
         </form>
@@ -104,3 +107,10 @@
     <partial name="_ValidationScriptsPartial" />
     }
 }
+<script>
+    const passwordField = document.getElementById('password');
+    const confirmPasswordField = document.getElementById('passwordtekrar');
+
+    passwordField.addEventListener('paste', e=> e.preventDefault());
+    confirmPasswordField.addEventListener('paste', e=> e.preventDefault());
+</script>

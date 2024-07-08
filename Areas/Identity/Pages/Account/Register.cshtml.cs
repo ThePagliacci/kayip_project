@@ -107,6 +107,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
+            [Required (ErrorMessage = "Şifre onaylama alanı zorunludur." )]
             [Display(Name = "Şifre Onaylama")]
             [Compare("Password", ErrorMessage = "Şifre ve onay şifresi eşleşmiyor.")]
             public string ConfirmPassword { get; set; }
@@ -165,7 +166,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturmuştur.");
 
-                    if(String.IsNullOrEmpty(Input.Role))
+                    if(!String.IsNullOrEmpty(Input.Role))
                     {
                         await _userManager.AddToRoleAsync(user, Input.Role);
                     }
@@ -199,7 +200,16 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Code == "DuplicateUserName")
+                    {
+                        ModelState.AddModelError(string.Empty, "Bu e-posta adresi zaten kullanılmaktadır.");
+                        break; // Exit the loop after adding the specific error message
+                    }
+                    else if (error.Code.Contains("Password"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Parola yeterince güçlü değil.");
+                    }
+                        ModelState.AddModelError(string.Empty, "Geçersiz giriş denemesi.");
                 }
             }
 

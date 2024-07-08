@@ -128,7 +128,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Geçersiz giriş denemesi.");
+                    ModelState.AddModelError(string.Empty, "Parola yanlış.");
                     return Page();
                 }
             }
