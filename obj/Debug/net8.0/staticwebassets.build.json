@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "V5OGVvtpQ+Y8W1UOF37DxqpxUVdC8+Wy1tJwgsniuoM=",
+  "Hash": "Uosky992HU1+U++bIlnZsTbW7lOcxaG0H+05RpHpgEI=",
   "Source": "kayip_project",
   "BasePath": "_content/kayip_project",
   "Mode": "Default",
@@ -1668,6 +1668,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.css"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.css.map",
+      "SourceId": "kayip_project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\kayip_project\\wwwroot\\",
+      "BasePath": "_content/kayip_project",
+      "RelativePath": "assets/vendor/bootstrap-icons/bootstrap-icons.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.css.map"
     },
     {
       "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.json",

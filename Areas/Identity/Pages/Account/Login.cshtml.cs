@@ -64,15 +64,15 @@ namespace kayip_project.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "E-posta alanı zorunludur.")]
+            [EmailAddress(ErrorMessage = "Geçersiz e-posta formatı.")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required (ErrorMessage = "Şifre alanı zorunludur." )]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -83,7 +83,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             [Display(Name = "Beni Hatırlat?")]
             public bool RememberMe { get; set; }
         }
-
+ 
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))

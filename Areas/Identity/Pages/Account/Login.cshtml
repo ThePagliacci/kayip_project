@@ -24,7 +24,7 @@
                 <div class="row gy-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="col-md-12 form-group">
-                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <label asp-for="Input.Email" class="form-label">E posta</label>
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
@@ -73,13 +73,13 @@
 
                <div class="col-md-10 m-8 d-flex flex-column align-items-center center-button">
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Şifrenizi unuttunuz mu?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Yeni bir kullanıcı olarak kayıt olun</a>
                     </p>
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">E-posta onayını yeniden gönder</a>
                     </p> 
               </div>
         </div>
@@ -89,5 +89,7 @@
 </section>
 
 @section Scripts {
+    @{
     <partial name="_ValidationScriptsPartial" />
+    }
 }

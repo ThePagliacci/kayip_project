@@ -88,13 +88,14 @@ namespace kayip_project.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "E-posta alanı zorunludur.")]
+            [EmailAddress(ErrorMessage = "Geçersiz e-posta formatı.")]
+            [Display(Name = "E posta")]
             public string Email { get; set; }
 
-            [Required]
+            [Required (ErrorMessage = "Adı alanı zorunludur." )]
             public string FName { get; set; }
-            [Required]
+            [Required (ErrorMessage = "Soyadı alanı zorunludur." )]
             public string LName { get; set; }
             public string? City { get; set; }
             public string? District { get; set; }

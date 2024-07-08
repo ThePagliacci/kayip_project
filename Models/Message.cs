@@ -10,11 +10,13 @@ namespace kayip_project.Models
     { 
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required (ErrorMessage = "E posta alanı zorunludur." )]
+        [EmailAddress(ErrorMessage = "Geçersiz e-posta formatı.")]
         public string Name { get; set; }
-        [Required]
+        [Required (ErrorMessage = "Konu alanı zorunludur." )]
+
         public string Subject { get; set; }
-        [Required]
+        [Required (ErrorMessage = "Mesaj alanı zorunludur." )]
         public string Body { get; set; }
     }
 }

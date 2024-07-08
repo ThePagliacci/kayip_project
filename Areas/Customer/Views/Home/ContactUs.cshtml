@@ -2,45 +2,51 @@
 @{
     ViewData["Title"] = "Iletişim";
 }
-<section class="section pb-5">
+<section class="section">
   <div class="container">
-    <div class="row mb-5 align-items-end">
+    <div class="row mb-5 justify-content-center">
       <div class="col-md-6" data-aos="fade-up">
-        <h2>iletişim</h2>
-        <p class="mb-0">web sitesini geliştirmeye yardımcı olacak düşüncelerinizi veya aklınıza takılan herhangi bir soruyu göndermekten çekinmeyin.
+           @if (TempData["StatusMessage"] != null)
+          {           
+            <div class=" alert alert-success alert-dismissible " role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              @TempData["StatusMessage"]
+            </div>
+          }
+        <h2 class="center-button">iletişim</h2>
+        <p class="mb-0 mt-4">web sitesini geliştirmeye yardımcı olacak düşüncelerinizi veya aklınıza takılan herhangi bir soruyu göndermekten çekinmeyin.
         </p>
       </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
-        <form method="post" class="php-email-form">
+          <div asp-validation-summary="ModelOnly"></div>
+        <form method="post">
           <div class="col-md-12 form-group">
-            <label for="Name">Email</label>
-            <input type="text" name="Name" class="form-control" id="email">
+            <label asp-for="Name">E posta</label>
+            <input asp-for="Name" type="text" name="Name" class="form-control mb-2">
             <span asp-validation-for="Name" class="text-danger"></span>
           </div>
           <div class="col-md-12 form-group">
-            <label for="Subject">Konu</label>
-            <input type="text" name="Subject" class="form-control" id="subject">
+            <label asp-for="Subject">Konu</label>
+            <input asp-for="Subject" type="text" name="Subject" class="form-control mb-2">
             <span asp-validation-for="Subject" class="text-danger"></span>
           </div>
           <div class="col-md-12 form-group">
-            <label for="Body">Mesaj</label>
-            <textarea class="form-control" name="Body" id="message" cols="30" rows="10"></textarea>
+            <label asp-for="Body">Mesaj</label>
+            <textarea asp-for="Body" class="form-control mb-2 custom-textarea" name="Body"cols="30" rows="10"></textarea>
             <span asp-validation-for="Body" class="text-danger"></span>
           </div>
-          <div class="col-md-6 mt-0 form-group">
-            <input type="submit" class="readmore d-block w-100" value="Send Message">
+          <div class="col-md-6 mt-0 form-group center-button ">
+            <input type="submit" class="readmore w-75 mb-3" value="Gönder">
           </div>
         </form>
-      </div>
-      <div class="col-md-6">
-        <h1>
-          some type of message or something,
-          if nothing is put in here then the form should 
-          be in the middle
-        </h1>
       </div>
     </div>
   </div>
 </section>
+@section Scripts {
+  @{
+    <partial name="_ValidationScriptsPartial" />
+  }
+}

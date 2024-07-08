@@ -10,7 +10,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
+using System.Threading; 
 using System.Threading.Tasks;
 using kayip_project.Models;
 using kayip_project.Utility;
@@ -87,19 +87,19 @@ namespace kayip_project.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            [Required(ErrorMessage = "E-posta alanı zorunludur.")]
+            [EmailAddress(ErrorMessage = "Geçersiz e-posta formatı.")]
+            [Display(Name = "E posta")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required (ErrorMessage = "Şifre alanı zorunludur." )]
             [StringLength(100, ErrorMessage = "{0} en az {2} ve en fazla {1} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Şifre")]
             public string Password { get; set; }
 
             /// <summary>
@@ -107,7 +107,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Şifre Onaylama")]
             [Compare("Password", ErrorMessage = "Şifre ve onay şifresi eşleşmiyor.")]
             public string ConfirmPassword { get; set; }
 
@@ -115,13 +115,12 @@ namespace kayip_project.Areas.Identity.Pages.Account
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
-        [Required]
-        public string FName { get; set; }
-        [Required]
-        public string LName { get; set; }
-        public string? City { get; set; }
-        public string? District { get; set; }
-
+            [Required (ErrorMessage = "Adı alanı zorunludur." )]
+            public string FName { get; set; }
+            [Required (ErrorMessage = "Soyadı alanı zorunludur." )]
+            public string LName { get; set; }
+            public string? City { get; set; }
+            public string? District { get; set; }
         }
 
 

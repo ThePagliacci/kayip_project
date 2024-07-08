@@ -42,35 +42,35 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-        public async Task<ActionResult> ContactUs(Message message)
+    public async Task<ActionResult> ContactUs(Message message)
+    {
+        var emailUsername = _configuration["Email:Username"];
+        var emailPassword = _configuration["Email:Password"];
+        if(ModelState.IsValid)
         {
-            var emailUsername = _configuration["Email:Username"];
-            var emailPassword = _configuration["Email:Password"];
-            if(ModelState.IsValid)
-            {
-                MailMessage mail = new MailMessage(message.Name, emailUsername);
-                mail.Subject = "Contact Us Message!!";
-                mail.Body ="User Email: " +  message.Name +"<br>User Massage: "+ message.Subject +"<br>" + message.Body;
-                mail.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host =  "smtp.gmail.com";
-                smtp.Port= 587;
-                smtp.EnableSsl = true;
+            MailMessage mail = new MailMessage(message.Name, emailUsername);
+            mail.Subject = "Contact Us Message!!";
+            mail.Body ="User Email: " +  message.Name +"<br>User Massage: "+ message.Subject +"<br>" + message.Body;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host =  "smtp.gmail.com";
+            smtp.Port= 587;
+            smtp.EnableSsl = true;
 
-                NetworkCredential nc = new NetworkCredential(emailUsername, emailPassword);
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            NetworkCredential nc = new NetworkCredential(emailUsername, emailPassword);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = nc;
-                smtp.Send(mail);
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = nc;
+            smtp.Send(mail);
 
-                _unitOfWork.Message.Add(message);
-                _unitOfWork.Save();
+            _unitOfWork.Message.Add(message);
+            _unitOfWork.Save();
 
-                ViewBag.Message = "Mail sent successfully";
-                ModelState.Clear();
-                return View();
-            }
-                return View("index");
+            TempData["StatusMessage"] = "Bizimle iletişime geçtiğiniz için teşekkür ederiz. E-postanız başarıyla gönderildi.";
+
+            return View();
         }
+        return View();
+    }
 }

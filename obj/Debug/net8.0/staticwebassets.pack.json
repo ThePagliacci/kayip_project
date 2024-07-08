@@ -105,6 +105,10 @@
       "PackagePath": "staticwebassets\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.css"
     },
     {
+      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.css.map",
+      "PackagePath": "staticwebassets\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.css.map"
+    },
+    {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.json",
       "PackagePath": "staticwebassets\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.json"
     },
