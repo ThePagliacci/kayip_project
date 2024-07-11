@@ -62,7 +62,8 @@
                     <option disabled selected>- select a role -</option>
                 </select>
             </div>
-            
+                <div class="g-recaptcha" data-sitekey="@Model.RecaptchaSiteKey"></div>
+
             <div class="col-md-10 m-8 d-flex flex-column align-items-center center-button">
             <button id="registerSubmit" type="submit" class="readmore w-75 mb-3">Kayıt Ol</button>
           </div>
@@ -104,6 +105,7 @@
 </section>
 @section Scripts {
     @{
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <partial name="_ValidationScriptsPartial" />
     }
 }

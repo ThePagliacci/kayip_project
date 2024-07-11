@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Net.Http;
+using System.Reflection.Metadata.Ecma335;
+
 
 namespace kayip_project.Areas.Identity.Pages.Account
 {
@@ -21,12 +24,20 @@ namespace kayip_project.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IConfiguration _configuration;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, IConfiguration configuration, UserManager<IdentityUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _configuration = configuration;
+            _userManager = userManager;
         }
+        public string RecaptchaSiteKey => _configuration["reCAPTCHA:SiteKey"];
+        public string RecaptchaSecreteKey => _configuration["reCAPTCHA:SecretKey"];
+
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -34,6 +45,9 @@ namespace kayip_project.Areas.Identity.Pages.Account
         /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
+
+        [BindProperty]
+        public string? RecaptchaToken { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -100,7 +114,7 @@ namespace kayip_project.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-
+ 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -109,28 +123,22 @@ namespace kayip_project.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("Kullanıcı giriş yapmış.");
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("Kullanıcı hesabı kilitlenmiş.");
-                    return RedirectToPage("./Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Parola yanlış.");
-                    return Page();
-                }
+                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                    if(result.Succeeded)
+                    {
+                        _logger.LogInformation("Kullanıcı giriş yapmış.");
+                        return LocalRedirect(returnUrl);
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("Kullanıcı hesabı kilitlenmiş.");
+                        return RedirectToPage("./Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Parola yanlış.");
+                        return Page();
+                    }
             }
 
             // If we got this far, something failed, redisplay form

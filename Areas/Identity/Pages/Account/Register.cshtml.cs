@@ -57,7 +57,8 @@ namespace kayip_project.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _configuration = configuration;
         }
-
+        public string RecaptchaSiteKey => _configuration["reCAPTCHA:SiteKey"];
+        public string RecaptchaSecreteKey => _configuration["reCAPTCHA:SecretKey"];
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -161,6 +162,16 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 user.City = Input.City;
                 user.District = Input.District;
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+
+                var recaptchaResponse = Request.Form["g-recaptcha-response"];
+                var isRecaptchaValid = await ValidateRecaptcha(recaptchaResponse);
+                if (!isRecaptchaValid)
+                {
+                    ModelState.AddModelError(string.Empty, "reCAPTCHA doğrulaması başarısız.");
+                    return Page();
+                }
+
 
                 if (result.Succeeded)
                 {
@@ -268,6 +279,20 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 throw new NotSupportedException("Standart kullanıcı arayüzü e-posta destekli bir kullanıcı belleği gerektirir.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
+        }
+
+        private async Task<bool> ValidateRecaptcha(string recaptchaResponse)
+        {
+                var secretKey = _configuration["reCAPTCHA:SecretKey"];
+                var httpClient = new HttpClient();
+                var response = await httpClient.PostAsync($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={recaptchaResponse}", null);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                dynamic jsonData = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonResponse);
+                return jsonData.success;
+            }
+            return false;
         }
     }
 }

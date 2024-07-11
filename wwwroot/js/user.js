@@ -13,22 +13,40 @@ function LoadDataTable() {
     { data: 'city', width: "15%"},
     { data: 'district', width: "25%"},
     { data: 'role', width: "25%"},
-
     {
-      data: 'id',
+      data: { id:"id", lockoutEnd:"lockoutEnd"},
       render: function (data) {
-        return (
-          "<div class='w-75 btn-group' role='group'><a href='/admin/user/Edit?id=" +
-          data +
-          "'class='btn btn-primary mx-2'><i class='bi bi-pencil-square'></i>Edit</a><a onClick=Delete('/admin/user/delete?id=" +
-          data +
-          "') class='btn btn-danger mx-2'><i class='bi bi-trash-fill'><i>Delete</a></div>"
-        );
+        var today = new Date().getTime();
+        var lockout = new Date(data.lockoutEnd).getTime();
+        if (lockout > today) 
+        {
+          return "<div class='m-2 text-center'><a onclick=LockUnlock(" + data.id + ") class='btn btn-success text-white' style='cursor:poimter; width:150px;'<i></i> Unlock</a></div><div class='w-75 btn-group' role='group'><a href='/admin/user/Edit?id=" +data+"'class='btn btn-primary mx-2'><i></i>Edit</a><a onClick=Delete('/admin/user/delete?id="+data +"') class='btn btn-danger mx-2'><i class='bi bi-trash-fill'><i>Delete</a></div>"
+        }
+        else
+        {
+          return "<div class='m-2 text-center'><a onclick=LockUnlock(" + data.id + ") class='btn btn-danger text-white' style='cursor:poimter; width:150px;'<i></i>lock</a></div><div class='w-75 btn-group' role='group'><a href='/admin/user/Edit?id=" +
+          data +"'class='btn btn-primary mx-2'><i></i>Edit</a><a onClick=Delete('/admin/user/delete?id=" +data +"') class='btn btn-danger mx-2'><i class='bi bi-trash-fill'><i>Delete</a></div>"
+        }
       },
       width: "20%",
-    },
+    },   
   ],
 });
+}
+
+function LockUnlock(id) {
+  $.ajax({
+      type: "POST",
+      url: '/Admin/User/LockUnlock',
+      data: JSON.stringify(id),
+      contentType: "application/json",
+      success: function (data) {
+          if (data.success) {
+              toastr.success(data.message);
+              dataTable.ajax.reload();
+          }
+      }
+  });
 }
 
 function Delete(url) {

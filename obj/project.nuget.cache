@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MQ86HKCEFm7U1vGYvz1WkhXGYj036qDAk6m2tIA0+SoTCEIMGBZ3HT6T9SQ+HMSYfDPsU4K8lWXKFC6CUIH11g==",
+  "dgSpecHash": "KG8RIFJcsSdVjatqL5eins6zaiOHJEEs8gjTMhO+lYOMLKym5BsOH4njo+YpiDy36kJWyDcbJPfwXy69xouURg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\kayip_project\\kayip_project.csproj",
   "expectedPackageFiles": [
@@ -171,7 +171,9 @@
     "C:\\Users\\hp\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\system.threading.tasks.dataflow\\7.0.0\\system.threading.tasks.dataflow.7.0.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\hp\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+    "C:\\Users\\hp\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.7\\microsoft.windowsdesktop.app.ref.8.0.7.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.7\\microsoft.aspnetcore.app.ref.8.0.7.nupkg.sha512"
   ],
   "logs": []
 }
