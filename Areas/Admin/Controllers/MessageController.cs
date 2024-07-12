@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using kayip_project.Models;
 using kayip_project.Repository.IRepository;
+using kayip_project.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.Extensions.Logging;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.Logging;
 namespace kayip_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Admin_Role)]
     public class MessageController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

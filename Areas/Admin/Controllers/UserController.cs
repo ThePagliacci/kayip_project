@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using kayip_project.Data;
 using kayip_project.Models;
 using kayip_project.Repository.IRepository;
+using kayip_project.Utility;
 using kayip_project.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,6 +18,7 @@ using Microsoft.Extensions.Logging;
 namespace kayip_project.Areas.Admin.Controllers.Admin
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Admin_Role)]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -20,12 +20,12 @@ function LoadDataTable() {
         var lockout = new Date(data.lockoutEnd).getTime();
         if (lockout > today) 
         {
-          return "<div class='m-2 text-center'><a onclick=LockUnlock(" + data.id + ") class='btn btn-success text-white' style='cursor:poimter; width:150px;'<i></i> Unlock</a></div><div class='w-75 btn-group' role='group'><a href='/admin/user/Edit?id=" +data+"'class='btn btn-primary mx-2'><i></i>Edit</a><a onClick=Delete('/admin/user/delete?id="+data +"') class='btn btn-danger mx-2'><i class='bi bi-trash-fill'><i>Delete</a></div>"
+          return "<div class='m-2 text-center'><a onclick=LockUnlock(" + data.id + ") class='btn btn-success text-white'  width:150px;'<i></i> Unlock</a></div><div class='w-75 btn-group' role='group'><a href='/admin/user/Edit?id=" +data+"'class='btn btn-primary mx-2'><i></i>Edit</a><a onClick=Delete('/admin/user/delete?id="+data +"') class='btn btn-danger mx-2'><i><i>Delete</a></div>"
         }
         else
         {
-          return "<div class='m-2 text-center'><a onclick=LockUnlock(" + data.id + ") class='btn btn-danger text-white' style='cursor:poimter; width:150px;'<i></i>lock</a></div><div class='w-75 btn-group' role='group'><a href='/admin/user/Edit?id=" +
-          data +"'class='btn btn-primary mx-2'><i></i>Edit</a><a onClick=Delete('/admin/user/delete?id=" +data +"') class='btn btn-danger mx-2'><i class='bi bi-trash-fill'><i>Delete</a></div>"
+          return "<div class='m-2 text-center'><a onclick=LockUnlock(" + data.id + ") class='btn btn-danger text-white'  width:150px;'<i></i>lock</a></div><div class='w-75 btn-group' role='group'><a href='/admin/user/Edit?id=" +
+          data +"'class='btn btn-primary mx-2'><i></i>Edit</a><a onClick=Delete('/admin/user/delete?id=" +data +"') class='btn btn-danger mx-2'><i><i>Delete</a></div>"
         }
       },
       width: "20%",

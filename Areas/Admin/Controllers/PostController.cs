@@ -11,10 +11,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
+using kayip_project.Utility;
 
 namespace kayip_project.Areas.Admin.Controllers.Admin
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Admin_Role)]
     public class PostController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
