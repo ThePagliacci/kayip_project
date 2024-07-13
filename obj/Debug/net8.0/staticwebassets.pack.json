@@ -5,18 +5,6 @@
       "PackagePath": "staticwebassets\\kayip_project.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\401.html",
-      "PackagePath": "staticwebassets\\Admin\\401.html"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\404.html",
-      "PackagePath": "staticwebassets\\Admin\\404.html"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\500.html",
-      "PackagePath": "staticwebassets\\Admin\\500.html"
-    },
-    {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\assets\\demo\\chart-area-demo.js",
       "PackagePath": "staticwebassets\\Admin\\assets\\demo\\chart-area-demo.js"
     },
@@ -33,44 +21,12 @@
       "PackagePath": "staticwebassets\\Admin\\assets\\img\\error-404-monochrome.svg"
     },
     {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\charts.html",
-      "PackagePath": "staticwebassets\\Admin\\charts.html"
-    },
-    {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\css\\styles.css",
       "PackagePath": "staticwebassets\\Admin\\css\\styles.css"
     },
     {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\index.html",
-      "PackagePath": "staticwebassets\\Admin\\index.html"
-    },
-    {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\js\\scripts.js",
       "PackagePath": "staticwebassets\\Admin\\js\\scripts.js"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\layout-sidenav-light.html",
-      "PackagePath": "staticwebassets\\Admin\\layout-sidenav-light.html"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\layout-static.html",
-      "PackagePath": "staticwebassets\\Admin\\layout-static.html"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\login.html",
-      "PackagePath": "staticwebassets\\Admin\\login.html"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\password.html",
-      "PackagePath": "staticwebassets\\Admin\\password.html"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\register.html",
-      "PackagePath": "staticwebassets\\Admin\\register.html"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\Admin\\tables.html",
-      "PackagePath": "staticwebassets\\Admin\\tables.html"
     },
     {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\assets\\css\\style.css",
@@ -331,10 +287,6 @@
     {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
-    },
-    {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\99c4f17b-3f69-490e-8bbd-1459428eaece.png",
-      "PackagePath": "staticwebassets\\images\\post\\99c4f17b-3f69-490e-8bbd-1459428eaece.png"
     },
     {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\message.js",
