@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Uosky992HU1+U++bIlnZsTbW7lOcxaG0H+05RpHpgEI=",
+  "Hash": "bbS7PJBBIG8ThZxDcYHFLnjMG1qMddrdueMcF8NGbP0=",
   "Source": "kayip_project",
   "BasePath": "_content/kayip_project",
   "Mode": "Default",
@@ -2753,12 +2753,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\8dfffad1-2b78-45b8-a953-58481aad2353.png",
+      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\99c4f17b-3f69-490e-8bbd-1459428eaece.png",
       "SourceId": "kayip_project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\hp\\kayip_project\\wwwroot\\",
       "BasePath": "_content/kayip_project",
-      "RelativePath": "images/post/8dfffad1-2b78-45b8-a953-58481aad2353.png",
+      "RelativePath": "images/post/99c4f17b-3f69-490e-8bbd-1459428eaece.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2769,26 +2769,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\post\\8dfffad1-2b78-45b8-a953-58481aad2353.png"
-    },
-    {
-      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\ae2556e7-ade1-4351-aece-2c9c14c7e0ce.png",
-      "SourceId": "kayip_project",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hp\\kayip_project\\wwwroot\\",
-      "BasePath": "_content/kayip_project",
-      "RelativePath": "images/post/ae2556e7-ade1-4351-aece-2c9c14c7e0ce.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\post\\ae2556e7-ade1-4351-aece-2c9c14c7e0ce.png"
+      "OriginalItemSpec": "wwwroot\\images\\post\\99c4f17b-3f69-490e-8bbd-1459428eaece.png"
     },
     {
       "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\message.js",

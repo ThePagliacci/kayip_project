@@ -123,11 +123,20 @@ namespace kayip_project.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    int accessFailedCount = await _userManager.GetAccessFailedCountAsync(user);
+                    int maxFailedAccessAttempts = _userManager.Options.Lockout.MaxFailedAccessAttempts;
+
                     var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                     if(result.Succeeded)
                     {
                         _logger.LogInformation("Kullanıcı giriş yapmış.");
                         return LocalRedirect(returnUrl);
+                    }
+                    if(accessFailedCount + 1 >= maxFailedAccessAttempts)
+                    {
+                        ModelState.AddModelError(string.Empty, "Hesabınız kilitlenmeden önce son bir deneme hakkınız var.");
+                        return Page();
                     }
                     if (result.IsLockedOut)
                     {
