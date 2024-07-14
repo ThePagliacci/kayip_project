@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using kayip_project.Data;
 using kayip_project.Models;
-using kayip_project.Repository.IRepository;
+using kayip_project.Repository.IRepository; 
 
 namespace kayip_project.Repository
 {

@@ -21,11 +21,13 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
     [Authorize(Roles = SD.Admin_Role)]
     public class UserController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<IdentityUser> _userManager;
-        public UserController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
+        public UserController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
 
@@ -34,67 +36,82 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
             return View();
         }
 
-        public IActionResult Edit(string? id)
+        public async Task<IActionResult> Edit(string? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            string RoleID = _db.UserRoles.FirstOrDefault(u=>u.UserId == id).RoleId;
+            var user = await _userManager.FindByIdAsync(id);
+            
+            var userRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+
             UserVM userVM = new()
             {
-                ApplicationUser = _db.ApplicationUsers.FirstOrDefault(u =>u.Id == id),
-                RoleList = _db.Roles.Select(x=>x.Name).Select(i=> new SelectListItem{
-                    Text = i,
-                    Value = i
+                ApplicationUser = (ApplicationUser)user,
+                RoleList = _roleManager.Roles.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id, // Assuming i.Id is already a string
+                    Selected = i.Name == userRole // Set Selected based on user's current role name
                 }),
             };
-            userVM.ApplicationUser.Role = _db.Roles.FirstOrDefault(u=> u.Id == RoleID).Name;
+
             return View(userVM);
         }
 
-         [HttpPost]
-       public IActionResult Edit(UserVM userVM)
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserVM userVM)
         {
-            string RoleID = _db.UserRoles.FirstOrDefault(u=> u.UserId == userVM.ApplicationUser.Id).RoleId;
-            string oldRole = _db.Roles.FirstOrDefault(u=>u.Id == RoleID).Name;
-            ApplicationUser applicationUser = _db.ApplicationUsers.FirstOrDefault(u=> u.Id == userVM.ApplicationUser.Id);
-            _db.ApplicationUsers.Update(applicationUser);
-            if(applicationUser != null)
+            string oldRole = (await _userManager.GetRolesAsync(_unitOfWork.ApplicationUser.Get(u => u.Id == userVM.ApplicationUser.Id))).FirstOrDefault();
+
+            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userVM.ApplicationUser.Id);
+            if (applicationUser != null)
             {
                 applicationUser.FName = userVM.ApplicationUser.FName;
                 applicationUser.LName = userVM.ApplicationUser.LName;
                 applicationUser.City = userVM.ApplicationUser.City;
                 applicationUser.District = userVM.ApplicationUser.District;
                 applicationUser.Email = userVM.ApplicationUser.Email;
-            }
-            _db.SaveChanges();
 
-            if(!(userVM.ApplicationUser.Role == oldRole))
+                _unitOfWork.ApplicationUser.Update(applicationUser);
+                _unitOfWork.Save();
+            }
+
+            // Ensure role ID is valid
+            string roleId = userVM.ApplicationUser.Role; // Assuming userVM.ApplicationUser.Role is the role ID
+
+            var role = await _roleManager.FindByIdAsync(roleId);
+
+            if (role != null && role.Name != oldRole)
             {
-                //a role was updated
-                _userManager.RemoveFromRoleAsync(applicationUser, oldRole).GetAwaiter().GetResult();
-                _userManager.AddToRoleAsync(applicationUser, userVM.ApplicationUser.Role).GetAwaiter().GetResult();
+                // Role exists and is different from the old role
+                if (!string.IsNullOrEmpty(oldRole))
+                {
+                    await _userManager.RemoveFromRoleAsync(applicationUser, oldRole);
+                }
+
+                // Add the user to the new role by ID
+                await _userManager.AddToRoleAsync(applicationUser, role.Name);
+
+                _unitOfWork.ApplicationUser.Update(applicationUser);
+                _unitOfWork.Save();
             }
 
             return RedirectToAction("Index");
         }
-    
+
+
         #region API CALLS
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<ApplicationUser> userList = _db.ApplicationUsers.ToList();
-
-            var userRoles = _db.UserRoles.ToList();
-            var roles = _db.Roles.ToList();
+            List<ApplicationUser> userList = _unitOfWork.ApplicationUser.GetAll().ToList();
 
             foreach(var user in userList)
             {
-                var roleId = userRoles.FirstOrDefault(u=>u.UserId == user.Id).RoleId;
-
-                user.Role = roles.FirstOrDefault(u=>u.Id == roleId).Name;
+                user.Role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
             }
 
             return Json(new {data = userList});
@@ -104,27 +121,37 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
         public IActionResult Delete(string? id)
         {
             var userToBeDeleted = _userManager.FindByIdAsync(id).GetAwaiter().GetResult();
-
             if(userToBeDeleted == null)
             {
                 return Json(new {success = false, message = "Error while deleting post"});
             }
+            // Retrieve user roles and remove them
+            var roles = _userManager.GetRolesAsync(userToBeDeleted).GetAwaiter().GetResult();
+            if (roles.Any())
+            {
+                foreach (var role in roles)
+                {
+                    var result = _userManager.RemoveFromRoleAsync(userToBeDeleted, role).GetAwaiter().GetResult();
+                    if (!result.Succeeded)
+                    {
+                        return Json(new { success = false, message = "Error while removing user roles" });
+                    }
+                }
+            }
+                // Delete the user
+                var deleteResult = _userManager.DeleteAsync(userToBeDeleted).GetAwaiter().GetResult();
+                if (!deleteResult.Succeeded)
+                {
+                    return Json(new { success = false, message = "Error while deleting user" });
+                }
+    return Json(new { success = true, message = "Deleted Successfully" });
 
-            //removing the user's role
-            string RoleID = _db.UserRoles.FirstOrDefault(u=> u.UserId == id).RoleId;
-            string Role = _db.Roles.FirstOrDefault(u=>u.Id == RoleID).Name;
-            _userManager.RemoveFromRoleAsync(userToBeDeleted, Role).GetAwaiter().GetResult();
-
-             //removing the user
-            _userManager.DeleteAsync(userToBeDeleted).GetAwaiter().GetResult();
-
-            return Json(new { success = true, message = "Deleted Successfully"});
         }
 
         [HttpPost]
         public IActionResult LockUnLock([FromBody]string id)
         {
-            var objFromDb = _db.ApplicationUsers.FirstOrDefault(u=> u.Id == id);
+            var objFromDb = _unitOfWork.ApplicationUser.Get(u=> u.Id == id);
             if(objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while locking/unlocking"});
@@ -138,7 +165,8 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
             {
                 objFromDb.LockoutEnd = DateTime.Now.AddYears(100);
             }
-            _db.SaveChanges();
+            _unitOfWork.ApplicationUser.Update(objFromDb);
+            _unitOfWork.Save();
 
             return Json(new { success = true, message = "Locked successfully"});
         }
