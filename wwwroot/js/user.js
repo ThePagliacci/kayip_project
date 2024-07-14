@@ -18,7 +18,7 @@ function LoadDataTable() {
       "render": function (data) {
         return  `<div class="w-75 btn-group" role="group">
                      <a href="/admin/user/Edit?id=${data}" class="btn btn-primary mx-2">Edit</a>               
-                     <a onClick=Delete('/admin/user/delete?id=${data}') class="btn btn-danger mx-2">Delete</a>
+                     <a onClick=Delete('/admin/user/delete/${data}') class="btn btn-danger mx-2">Delete</a>
                     </div>`
       },
       width: "10%",
@@ -30,14 +30,14 @@ function LoadDataTable() {
         var lockout = new Date(data.lockoutEnd).getTime();
         if (lockout > today) {
           return  `<div class="text-center">
-                             <a onclick=LockUnlock('${data.id}') class="btn btn-success text-white" style="width:100px;">
+                             <a onclick=LockUnLock('${data.id}') class="btn btn-success text-white" style="width:100px;">
                                     <i class="bi bi-lock-fill"></i>  UnLock
                                 </a> 
                         </div> `
           } 
           else {
           return `<div class="text-center">
-                                <a onclick=LockUnlock('${data.id}') class="btn btn-danger text-white" style="width:100px;">
+                                <a onclick=LockUnLock('${data.id}') class="btn btn-danger text-white" style="width:100px;">
                                     <i class="bi bi-unlock-fill"></i>  Lock
                                 </a>
                     </div>`
@@ -49,16 +49,19 @@ function LoadDataTable() {
 });
 }
 
-function LockUnlock(id) {
+function LockUnLock(id) {
+  const token = $('input[name="__RequestVerificationToken"]').val();
   $.ajax({
       type: "POST",
-      url: '/Admin/User/LockUnlock',
+      url: '/Admin/User/LockUnLock',
       data: JSON.stringify(id),
       contentType: "application/json",
+      headers: {
+        'RequestVerificationToken': token
+    },
       success: function (data) {
           if (data.success) {
             dataTable.ajax.reload();
-            TransformStream.success(data.message);
           }
       }
   });
@@ -78,7 +81,10 @@ function Delete(url) {
       $.ajax({
         url: url,
         type: "DELETE",
-        success: function (data) {
+        headers: {
+          'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+        },
+        success: function () {
           dataTable.ajax.reload();
         },
       });

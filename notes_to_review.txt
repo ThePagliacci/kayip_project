@@ -1,4 +1,4 @@
-1- when deploying the website (google) authorized redirect url should be updated
+1- when deploying the website (google) authorized & recaptcha redirect url should be updated
 
 2- apply prove you are not a robot 
 (appearently working on regestration pages

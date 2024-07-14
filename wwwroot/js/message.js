@@ -38,10 +38,12 @@ function Delete(url) {
       $.ajax({
         url:url,
         type: 'DELETE',
-        success: function (data)
+        headers: {
+          'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+        },
+        success: function ()
         {
           dataTable.ajax.reload();
-          toastr.success(data.message);
         }
       })
     }

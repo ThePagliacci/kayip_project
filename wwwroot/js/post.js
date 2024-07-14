@@ -20,7 +20,7 @@ function LoadDataTable() {
     {
       data: 'id',
       render: function (data) {
-        return `<div class="w-75 btn-group" role="group"><a href="/admin/post/upsert?id=${data}" class="btn btn-primary mx-2">Edit</a><a onClick=Delete('/admin/post/delete?id=${data}') class="btn btn-danger mx-2">Delete</a></div>`
+        return `<div class="w-75 btn-group" role="group"><a href="/admin/post/upsert?id=${data}" class="btn btn-primary mx-2">Edit</a><a onClick=Delete('/admin/post/delete/${data}') class="btn btn-danger mx-2">Delete</a></div>`
       },
       width: "15%",
     },
@@ -41,7 +41,10 @@ function Delete(url) {
       $.ajax({
         url: url,
         type: "DELETE",
-        success: function (data) {
+        headers: {
+          'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+        },
+        success: function () {
           dataTable.ajax.reload();
         },
       });
