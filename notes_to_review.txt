@@ -1,10 +1,8 @@
 1- when deploying the website (google) authorized & recaptcha redirect url should be updated
 
 2- apply prove you are not a robot 
-(appearently working on regestration pages
-********check out if it's even working on those pages first because I'm suspeciouse*************
-how does it even work
-)
+captcha keys in register
 
+3-in admin panel user edit get method: role list always shows admin
 
-3-user edit get method: role list always shows admin
+6-client side validation for terms and services

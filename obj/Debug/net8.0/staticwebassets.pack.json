@@ -289,6 +289,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\two-peoples-hands-holding-books-on-couch.jpg",
+      "PackagePath": "staticwebassets\\images\\post\\two-peoples-hands-holding-books-on-couch.jpg"
+    },
+    {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\message.js",
       "PackagePath": "staticwebassets\\js\\message.js"
     },

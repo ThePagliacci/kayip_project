@@ -104,7 +104,18 @@ h6 {
   transition: 0.2s all ease;
   font-weight: 700;
 }
-
+#ch:checked ~ .index-content
+{
+  display: block;
+  margin-bottom: 1.5rem;
+} 
+#ch:checked ~ .checked
+{
+  display: none;
+}
+.index-content{
+  display: none;
+}
 .readmore:active,
 .readmore:focus,
 .readmore:hover {
@@ -116,7 +127,6 @@ h6 {
   text-decoration: none;
   background: #000;
 }
-
 .sticky-content {
   position: sticky;
   position: -webkit-sticky;
@@ -292,6 +302,48 @@ h6 {
 .burger:after {
   top: 26px;
 }
+
+/*gonderlerim*/
+
+.card-icons {
+  position: absolute;
+  top: 10px;
+  right: 10px; /* Position the icons at the top-right corner */
+  display: flex;
+  gap: 10px;
+}
+
+.card-icons a {
+  color: #000; /* Set the icon color */
+  font-size: 18px; /* Set the icon size */
+  text-decoration: none;
+}
+.card
+{
+  max-width: 100%;
+  width: 100%;
+  flex-direction: row;
+  background-color: white; /* Initial background color */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial subtle shadow */
+}
+.card:hover {
+  transform: scale(1.01); /* Slightly scale up the card */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+
+.card-img-top
+{
+  padding: 20px;
+  max-width: 20%;
+}
+.index-image
+{
+  padding: 20px;
+  max-width: 50%;
+}
+/*gonderlerim*/
+
 /*what to do page */
 /* General styling for accordion columns */
 .my-accordion-column {
@@ -331,8 +383,8 @@ h6 {
 
 /* Hover effect for accordion buttons */
 .accordion-button:hover {
-  background-color: #c00;
-  color: #fff;
+  transform: scale(1.01); /* Slightly scale up the card */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
 }
 
 /* Styling for accordion body */

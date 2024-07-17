@@ -8,7 +8,6 @@ using kayip_project.Repository.IRepository;
 
 namespace kayip_projectA.Areas.Customer.Controllers;
     [Area("Customer")]
-
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

@@ -1,62 +1,75 @@
-﻿@{
+﻿@using kayip_project.Utility
+@{
     ViewData["Title"] = "Ana Sayfa";
+    string linkPath;
 }
       <!-- ======= Works Section ======= -->
       <section class="section site-portfolio">
         <div class="container">
           <div class="row mb-5 align-items-center">
-            <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
+            <div class="col-md-12 mb-4 mb-lg-0">
             <h2><span class="red">Gören</span> Var mı?</h2>
-              <p class="mb-0">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-                illum quia cupiditate commodi? Impedit tenetur adipisci error
-                iure? Atque necessitatibus dolorum inventore minus impedit sed
-                corporis accusamus. Error, tempora hic?
+              <p class="mt-4">
+                Bilgiyi özgürce genişletmek için bir platform sağlamaya adanmış web sitemize hoş geldiniz. Türkiye'de kayıp şahıs krizi yaşayan bireyleri desteklemeye adanmış ilk web sitesi olarak görevimiz eğitmek, yardımcı olmak ve bağlantı kurmaktır.
+                Paylaşılan tüm bilgilerin doğruluğunu ve güvenliğini sağlamak için çaba gösterirken, kullanıcıların gönderdikleri içerikten sorumlu olduklarını lütfen unutmayın. Sıkı güvenlik önlemleri alıyoruz, ancak şüpheli gönderilerle karşılaşırsanız, bunları derhal bildirmenizi öneririz. Uygun önlemlerin hızla alınacağından emin olabilirsiniz.
               </p>
+                @{
+                    linkPath = "";
+                  if(User.IsInRole(SD.User_Role))
+                  {
+                      linkPath = Url.Action("Create", "Post", new { area = "Customer" });
+                  }
+                  else
+                   {
+                      linkPath = Url.Action("Login", "Account", new { area = "Identity" });
+
+                   }
+                }
+              <u><a href="@linkPath">Kayıp bir kişiyi bildirmek ister misiniz?</a></u>
             </div>
-            <div
-              class="col-md-12 col-lg-6 text-start text-lg-end"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            ></div>
           </div>
-          <div
-            id="portfolio-grid"
-            class="row no-gutter"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-          <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <img class="img-fluid" src="image">
-            </a>
+                <input type="checkbox" id="ch" hidden>
+             <div class="index-content">
+                <div class="row">
+             <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-icons">
+                        <a class="question-icon" data-bs-toggle="popover" data-bs-trigger="hover">
+                            <i class="bi bi-question-lg"></i>
+                        </a>
+                    </div>
+                    <img class="index-image" src="~/images/post/two-peoples-hands-holding-books-on-couch.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <u>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque consectetur aperiam labore voluptatibus expedita sed sapiente iusto sunt, numquam repudiandae, in molestiae earum perspiciatis? Mollitia accusamus id delectus tempore eaque.</u>
+                    </div>
+                </div>
+            </div>
+                        <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-icons">
+                        <a class="question-icon" data-bs-toggle="popover" data-bs-trigger="hover">
+                            <i class="bi bi-question-lg"></i>
+                        </a>
+                    </div>
+                    <img class=" index-image" src="~/images/post/two-peoples-hands-holding-books-on-couch.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <u>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque consectetur aperiam labore voluptatibus expedita sed sapiente iusto sunt, numquam repudiandae, in molestiae earum perspiciatis? Mollitia accusamus id delectus tempore eaque.</u>
+                    </div>
+                </div>
+            </div>
+            </div>
+              <div class="col-md-6 mt-0 form-group center-button ">
+            <label for="ch" class="readmore mb-3">daha az oku</label>
           </div>
-          <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <img class="img-fluid" src="image">
-            </a>
-          </div>
-          <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <img class="img-fluid" src="image">
-            </a>
-          </div>
-          <div class="item design col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <img class="img-fluid" src="image">
-            </a>
-          </div>
-          <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <img class="img-fluid" src="image">
-            </a>
-          </div>
-          <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <img class="img-fluid" src="image">
-            </a>
-          </div>
+                      
         </div>
-                  <p class="center-button">insert slider here</p>
+
+          <div class="checked col-md-6 mt-0 form-group center-button ">
+            <label for="ch" class="readmore mb-3">Daha fazla oku</label>
+          </div>
         </div>
       </section>

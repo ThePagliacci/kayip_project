@@ -9,7 +9,6 @@
     <title>@ViewData["Title"] - Gören Var Mı?</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!-- Vendor CSS Files -->
-    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet" />
     <link
       href="~/assets/vendor/bootstrap/css/bootstrap.min.css"
       rel="stylesheet"
@@ -21,7 +20,7 @@
     <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
-    <link href="~/assets/css/style.css" rel="stylesheet" />
+        <link href="~/assets/css/style.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -30,34 +29,34 @@
         <div class="row align-items-start">
             <div class="col-md-2 d-none d-md-block">
                 <h3>
-                  <a asp-area="Customer" asp-action="Index">
+                  <a asp-controller="Home" asp-area="Customer" asp-action="Index">
                     Ana sayfa
                   </a></h3>
                 </p>
               </div>
           <div class="col-md-2 d-none d-md-block">
             <h3>
-              <a asp-area="Customer" asp-action="Help">
+              <a asp-controller="Home" asp-area="Customer" asp-action="Help">
                 Nasıl yardımcı olabilirim?
               </a></h3>
             </p>
           </div>
           <div class="col-md-2 d-none d-md-block">
-            <h3><a asp-area="Customer" asp-action="WhatToDo">
+            <h3><a asp-controller="Home" asp-area="Customer" asp-action="WhatToDo">
               ne yapmalıyım?
           </a></h3>
           </div>
              @if(User.IsInRole(SD.Admin_Role))
             {
             <div class="col-md-2 d-none d-md-block">
-            <h3><a asp-area="Admin" asp-controller="DashBoard" asp-action="Index">
+            <h3><a  asp-area="Admin" asp-controller="DashBoard" asp-action="Index">
               Admin Panel
           </a></h3>
           </div>
            }else if(User.IsInRole(SD.User_Role))
            {
             <div class="col-md-2 d-none d-md-block">
-            <h3><a href="#">
+            <h3><a asp-area="Customer" asp-controller="Post" asp-action="Index" >
              Gönderilerim
           </a></h3>
           </div>
@@ -66,6 +65,7 @@
             <h3>
             <a asp-area="Customer" asp-action="ContactUs">iletişim</a></h3>
           </div>
+          
               <partial name="_LoginPartial"/>
         </div>
       </div>
@@ -95,7 +95,7 @@
       <div class="row">
         <div class="col-sm-6">
           <p class="mb-1">
-            &copy; Copyright MyPortfolio. All Rights Reserved
+            &copy; Tüm Hakları Saklıdır.
           </p>
         </div>
         <div class="col-sm-6 social text-md-end">
@@ -108,13 +108,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
             @await RenderSectionAsync("Scripts", required: false)
     <!-- Vendor JS Files -->
+        <script src="~/assets/js/main.js"></script>
     <script src="~/assets/vendor/aos/aos.js"></script>
     <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
-
     <!-- Template Main JS File -->
-    <script src="~/assets/js/main.js"></script>
             </body>
 </html>

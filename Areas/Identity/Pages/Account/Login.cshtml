@@ -4,7 +4,6 @@
 @{
     ViewData["Title"] = "Giriş Yap";
 }
-
 <section class="section pb-5">
     <div class="container">
                 @if(User.Identity.IsAuthenticated)
@@ -20,7 +19,7 @@
                  </div>
             <div class="row justify-content-center">
             <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
-            <form id="account" method="post" onsubmit="onSubmit(event)">
+            <form id="account" method="post" >
                 <input type="hidden" name="" id="recaptchaTokenInputId" asp-for="RecaptchaToken">
                 <div class="row gy-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
@@ -63,7 +62,6 @@
   }
 </div>
 </section>
-
 @section Scripts {
     @{
     <partial name="_ValidationScriptsPartial" />

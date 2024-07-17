@@ -123,6 +123,13 @@ namespace kayip_project.Areas.Identity.Pages.Account
             public string LName { get; set; }
             public string? City { get; set; }
             public string? District { get; set; }
+
+            [Required(ErrorMessage = "Lütfen Şartlar ve Hizmetleri kabul edin.")]
+            public bool TermsAccepted { get; set; }
+
+            [Required(ErrorMessage = "Lütfen Gizlilik Politikası Şartlarını kabul edin.")]
+            public bool PolicyAccepted { get; set; }
+
         }
 
 
@@ -162,16 +169,6 @@ namespace kayip_project.Areas.Identity.Pages.Account
                 user.City = Input.City;
                 user.District = Input.District;
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
-
-                var recaptchaResponse = Request.Form["g-recaptcha-response"];
-                var isRecaptchaValid = await ValidateRecaptcha(recaptchaResponse);
-                if (!isRecaptchaValid)
-                {
-                    ModelState.AddModelError(string.Empty, "reCAPTCHA doğrulaması başarısız.");
-                    return Page();
-                }
-
 
                 if (result.Succeeded)
                 {
@@ -216,11 +213,23 @@ namespace kayip_project.Areas.Identity.Pages.Account
                         ModelState.AddModelError(string.Empty, "Bu e-posta adresi zaten kullanılmaktadır.");
                         break; // Exit the loop after adding the specific error message
                     }
+                    if (!Input.TermsAccepted)
+                    {
+                        ModelState.AddModelError(string.Empty, "Şartlar ve Hizmetleri kabul etmelisiniz.");
+                    }
+                    if (!Input.PolicyAccepted)
+                    {
+                        ModelState.AddModelError(string.Empty, "Gizlilik Politikası Şartlarını kabul etmelisiniz.");
+                    }
                     else if (error.Code.Contains("Password"))
                     {
                         ModelState.AddModelError(string.Empty, "Parola yeterince güçlü değil.");
                     }
+                    else
+                    {
                         ModelState.AddModelError(string.Empty, "Geçersiz giriş denemesi.");
+                    }
+
                 }
             }
 
@@ -281,18 +290,5 @@ namespace kayip_project.Areas.Identity.Pages.Account
             return (IUserEmailStore<IdentityUser>)_userStore;
         }
 
-        private async Task<bool> ValidateRecaptcha(string recaptchaResponse)
-        {
-                var secretKey = _configuration["reCAPTCHA:SecretKey"];
-                var httpClient = new HttpClient();
-                var response = await httpClient.PostAsync($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={recaptchaResponse}", null);
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                dynamic jsonData = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonResponse);
-                return jsonData.success;
-            }
-            return false;
-        }
     }
 }

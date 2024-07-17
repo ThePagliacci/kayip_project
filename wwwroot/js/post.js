@@ -12,8 +12,8 @@ function LoadDataTable() {
     { data: 'contactInfo', width: "15%"},
     { data: 'image',
     "render": function (data) {
-      var correctedUrl = data.replace('/Admin/', '/');
-      return `<img src="${correctedUrl}"/>`;
+      var correctedUrl = data.startsWith('/') ? data : '/' + data;
+      return `<img style="width:50%;"src="${correctedUrl}"/>`;
     },
       width: "25%"},
     { data: 'applicationUser.fName', width: "15%"},
