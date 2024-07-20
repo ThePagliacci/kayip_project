@@ -1,0 +1,64 @@
+@model kayip_project.ViewModels.PostVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}               
+
+    <div class="container-fluid px-4">
+                        <div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12  text-center">
+                <h2 class="text-dark py-2">Gönderi @(Model.Post.Id != 0? "Güncelle": "Oluştur")</h2>
+            </div>
+        </div
+     </div>
+        </div>
+
+    <div class="card-body p-4">
+    <form method="post" class="row" enctype="multipart/form-data">
+    <input asp-for="Post.Id" hidden>
+    <input asp-for="Post.Image" hidden>
+    <div class="border p-3">
+        <div class="py-2 col-12">
+            <label asp-for="Post.Title" class="ms-2 text-muted"></label>
+            <input asp-for="Post.Title" class="form-control border-0 shadow">
+            <span asp-validation-for="Post.Title" class="text-danger"></span>
+        </div>
+
+<div class="py-2 col-12">
+        <label asp-for="Post.Description" class="ms-2 text-muted"></label>
+    <textarea asp-for="Post.Description" class="form-control border-0 shadow"></textarea>
+    <span asp-validation-for="Post.Description" class="text-danger"></span>
+</div>
+
+            <div class="py-2 col-12">
+             <label asp-for="Post.ContactInfo" class="ms-2 text-muted"></label>
+            <input asp-for="Post.ContactInfo" class="form-control border-0 shadow">
+             <span asp-validation-for="Post.ContactInfo" class="text-danger"></span>
+        </div>
+
+             <div class="py-2 col-12">
+               <label asp-for="Post.Image" class="ms-2 text-muted"></label>
+            <input type="file" name="file" class="form-control border-0 shadow">
+        </div>
+        <div class="row pt-2">
+            <div class="col-6 col-md-3">
+                
+        <button type="submit" class="btn btn-dark form-control">@(Model.Post.Id != 0? "Güncelle": "Oluştur")</button>
+            </div>
+            <div class="col-6 col-md-3">
+        <a asp-controller="Post" asp-action="Index" class="btn btn-outline-primary border form-control">Geri Dön</a>
+            </div>
+        </div>
+    </div>
+</form>
+    </div>
+</div>
+ </div>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

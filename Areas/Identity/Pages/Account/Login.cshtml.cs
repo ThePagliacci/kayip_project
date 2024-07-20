@@ -143,7 +143,12 @@ namespace kayip_project.Areas.Identity.Pages.Account
                         _logger.LogWarning("Kullanıcı hesabı kilitlenmiş.");
                         return RedirectToPage("./Lockout");
                     }
-                    else
+                    if (!await _userManager.IsEmailConfirmedAsync(user))
+                    {
+                        ModelState.AddModelError(string.Empty, "E-posta adresiniz doğrulanmamış. Lütfen e-postanızı kontrol edin ve doğrulama işlemini gerçekleştirin.");
+                        return Page();
+                    }
+                    else 
                     {
                         ModelState.AddModelError(string.Empty, "Parola yanlış.");
                         return Page();

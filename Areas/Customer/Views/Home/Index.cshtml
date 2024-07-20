@@ -1,4 +1,5 @@
 ﻿@using kayip_project.Utility
+@model List<Post> 
 @{
     ViewData["Title"] = "Ana Sayfa";
     string linkPath;
@@ -9,15 +10,20 @@
           <div class="row mb-5 align-items-center">
             <div class="col-md-12 mb-4 mb-lg-0">
             <h2><span class="red">Gören</span> Var mı?</h2>
+            
               <p class="mt-4">
-                Bilgiyi özgürce genişletmek için bir platform sağlamaya adanmış web sitemize hoş geldiniz. Türkiye'de kayıp şahıs krizi yaşayan bireyleri desteklemeye adanmış ilk web sitesi olarak görevimiz eğitmek, yardımcı olmak ve bağlantı kurmaktır.
-                Paylaşılan tüm bilgilerin doğruluğunu ve güvenliğini sağlamak için çaba gösterirken, kullanıcıların gönderdikleri içerikten sorumlu olduklarını lütfen unutmayın. Sıkı güvenlik önlemleri alıyoruz, ancak şüpheli gönderilerle karşılaşırsanız, bunları derhal bildirmenizi öneririz. Uygun önlemlerin hızla alınacağından emin olabilirsiniz.
+                    <h5 class="mb-4">Türkiye'de kayıp kişi kriziyle karşı karşıya olan insanlara yardım etmeye odaklanmış ilk web sitesine hoş geldiniz.</h5>
+                    Bu web sitesi eğitmek, yardım etmek ve bağlantı kurmak için tamamen ücretsiz olarak kullanılmaktadır.
+                    Polise ulaştıktan ve gerekli yasal adımları attıktan sonra bu web sitesi size sesinizi duyurma ve arama çemberinizi genişletme fırsatı sunuyor. 
+                    <br>
+                    <br>
+                    Günümüzde dijital dünyasında, çevrimiçi bilgi paylaşımı, özellikle geniş bir kitleye ulaşmak istediğinizde, gerçek hayattaki kişisel iletişime göre önemli avantajlar sunmaktadır. <a class="red" href="https://www.statista.com/statistics/567027/predicted-number-of-internet-users-in-turkey/">Statista.com</a> göre, Türkiye'deki internet kullanıcı sayısının <strong>2029</strong> yılına kadar <strong>86,67</strong> milyona ulaşarak en yüksek seviyeye çıkması bekleniyor. Bu artış, internetin uzak mesafelerdeki insanlarla nasıl hızlı bir şekilde bağlantı kurabildiğini vurgulamaktadır. Bilginin yavaş ve sınırlı gruplara yayıldığı yüz yüze etkileşimlerin aksine, çevrimiçi platformlar dünya çapında bilgiye anında erişim sağlamaktadır. Bu yetenek sadece fikirlerin paylaşımını hızlandırmakla kalmıyor, aynı zamanda bilgiyi milyonlarca insan için daha erişilebilir hale getiriyor.
               </p>
                 @{
                     linkPath = "";
-                  if(User.IsInRole(SD.User_Role))
+                  if(User.IsInRole(SD.User_Role) || User.IsInRole(SD.Admin_Role))
                   {
-                      linkPath = Url.Action("Create", "Post", new { area = "Customer" });
+                      linkPath = Url.Action("Upsert", "Post", new { area = "Customer" });
                   }
                   else
                    {
@@ -25,42 +31,45 @@
 
                    }
                 }
-              <u><a href="@linkPath">Kayıp bir kişiyi bildirmek ister misiniz?</a></u>
+              <u><a href="#" data-bs-toggle="modal" data-bs-target="#policefirst">kayıp birini bildirmek ister misiniz?</a></u>
             </div>
           </div>
-                <input type="checkbox" id="ch" hidden>
+            <input type="checkbox" id="ch" hidden>
              <div class="index-content">
                 <div class="row">
+                  @foreach(var obj in Model)
+                  {
              <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-icons">
+                      @if (User.Identity.IsAuthenticated && obj.ApplicationUser.Email == User.Identity.Name){
+                        <a asp-controller="post" asp-action="Upsert" asp-area="Customer" class="edit-icon">
+                        <i class="bi bi-pen-fill"></i>
+                        </a>
+                        <a href="#" class="delete-icon">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                      }
+                      else
+                      {
                         <a class="question-icon" data-bs-toggle="popover" data-bs-trigger="hover">
                             <i class="bi bi-question-lg"></i>
                         </a>
+                      }
                     </div>
-                    <img class="index-image" src="~/images/post/two-peoples-hands-holding-books-on-couch.jpg" alt="Card image cap">
+                    <img class="index-image" src="@obj.Image">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <u>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque consectetur aperiam labore voluptatibus expedita sed sapiente iusto sunt, numquam repudiandae, in molestiae earum perspiciatis? Mollitia accusamus id delectus tempore eaque.</u>
+                        <h5 class="card-title">@obj.Title</h5>
+                        <p class="card-text">@obj.Description</p>
+                        <u>@obj.ContactInfo</u>
                     </div>
                 </div>
-            </div>
-                        <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-icons">
-                        <a class="question-icon" data-bs-toggle="popover" data-bs-trigger="hover">
-                            <i class="bi bi-question-lg"></i>
-                        </a>
-                    </div>
-                    <img class=" index-image" src="~/images/post/two-peoples-hands-holding-books-on-couch.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <u>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque consectetur aperiam labore voluptatibus expedita sed sapiente iusto sunt, numquam repudiandae, in molestiae earum perspiciatis? Mollitia accusamus id delectus tempore eaque.</u>
-                    </div>
-                </div>
-            </div>
+            </div> 
+                  @if(obj == null)
+                  {
+                    <p>Henüz Gönderi yok</p>
+                  }                   
+                  }
             </div>
               <div class="col-md-6 mt-0 form-group center-button ">
             <label for="ch" class="readmore mb-3">daha az oku</label>
@@ -73,3 +82,21 @@
           </div>
         </div>
       </section>
+
+                    <div class="modal fade" id="policefirst" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="modal-title">kayıp birini bildirmek ister misiniz?</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>
+                          Web sitesinde gönderi paylaşmadan önce, <a class="red" href="#">155</a> numaralı telefonu arayarak veya <a class="red" href="https://www.asayis.pol.tr/iletisim">https://www.asayis.pol.tr/iletisim</a> sitesini ziyaret ederek polisle iletişime geçmeyi düşünmelisiniz. Polisi bilgilendirmek, sevdiğiniz kişiyi bulmanıza yardımcı olacak <u><strong> ilk ve en önemli adımdır.</strong></u></p>
+                      </div>
+              <div class="col-md-10 m-8 d-flex flex-column align-items-center center-button">
+              <a href="@linkPath" class="text-center readmore w-75 mb-3">Anlıyorum</a>
+            </div>
+                  </div>
+                  </div>
+                </div>

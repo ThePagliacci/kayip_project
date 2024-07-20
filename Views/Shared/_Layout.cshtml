@@ -53,7 +53,8 @@
               Admin Panel
           </a></h3>
           </div>
-           }else if(User.IsInRole(SD.User_Role))
+           }
+           @if(User.IsInRole(SD.Admin_Role) || User.IsInRole(SD.User_Role))
            {
             <div class="col-md-2 d-none d-md-block">
             <h3><a asp-area="Customer" asp-controller="Post" asp-action="Index" >
@@ -95,7 +96,7 @@
       <div class="row">
         <div class="col-sm-6">
           <p class="mb-1">
-            &copy; Tüm Hakları Saklıdır.
+            &copy; Copyright Tüm Hakları Saklıdır.
           </p>
         </div>
         <div class="col-sm-6 social text-md-end">

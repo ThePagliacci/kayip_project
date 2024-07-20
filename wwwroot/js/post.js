@@ -29,13 +29,13 @@ function LoadDataTable() {
 }
 function Delete(url) {
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    title: "Emin misiniz?",
+    text: "Bunu geri döndüremezsiniz!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
+    confirmButtonText: "Evet, kaldır!",
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -45,6 +45,7 @@ function Delete(url) {
           'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
         },
         success: function () {
+          window.location.reload();
           dataTable.ajax.reload();
         },
       });

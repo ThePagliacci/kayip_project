@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PKW7fHlbxfh3ShKI0rs42wRrWlB3omjGVD5l1dUHc10=",
+  "Hash": "NiLMMr8jg4pTl7wEftiC6KTP/oE+JtK7xlCoIqp+/PA=",
   "Source": "kayip_project",
   "BasePath": "_content/kayip_project",
   "Mode": "Default",
@@ -2544,12 +2544,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\two-peoples-hands-holding-books-on-couch.jpg",
+      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\2652044f-39f1-47ec-b1b1-87a96e362bef.jpg",
       "SourceId": "kayip_project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\hp\\kayip_project\\wwwroot\\",
       "BasePath": "_content/kayip_project",
-      "RelativePath": "images/post/two-peoples-hands-holding-books-on-couch.jpg",
+      "RelativePath": "images/post/2652044f-39f1-47ec-b1b1-87a96e362bef.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2560,7 +2560,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\post\\two-peoples-hands-holding-books-on-couch.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\post\\2652044f-39f1-47ec-b1b1-87a96e362bef.jpg"
     },
     {
       "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\message.js",

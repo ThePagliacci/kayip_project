@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("kayip_project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8e7a756e87d7d95dc395b398af5c6ed5a00ef7a2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+353a15f0fa1a1cf66f93d38b061f1d16fca1c826")]
 [assembly: System.Reflection.AssemblyProductAttribute("kayip_project")]
 [assembly: System.Reflection.AssemblyTitleAttribute("kayip_project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

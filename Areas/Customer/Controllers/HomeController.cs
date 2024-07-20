@@ -23,7 +23,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        List<Post> postObj = _unitOfWork.Post.GetAll(includeProperties: "ApplicationUser").ToList();
+        return View(postObj);
     }
 
     public IActionResult Help()

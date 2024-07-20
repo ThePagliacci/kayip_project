@@ -28,7 +28,7 @@ namespace kayip_project.Areas.Admin.Controllers.Admin
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
-        }
+        } 
 
         public IActionResult Index()
         {
