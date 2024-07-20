@@ -23,17 +23,17 @@
           <div asp-validation-summary="ModelOnly"></div>
         <form method="post">
           <div class="col-md-12 form-group">
-            <label asp-for="Name">E posta</label>
+            <label asp-for="Name" class="post-form">E posta</label>
             <input asp-for="Name" type="text" name="Name" class="form-control mb-2">
             <span asp-validation-for="Name" class="text-danger"></span>
           </div>
           <div class="col-md-12 form-group">
-            <label asp-for="Subject">Konu</label>
+            <label asp-for="Subject" class="post-form">Konu</label>
             <input asp-for="Subject" type="text" name="Subject" class="form-control mb-2">
             <span asp-validation-for="Subject" class="text-danger"></span>
           </div>
           <div class="col-md-12 form-group">
-            <label asp-for="Body">Mesaj</label>
+            <label asp-for="Body" class="post-form">Mesaj</label>
             <textarea asp-for="Body" class="form-control mb-2 custom-textarea" name="Body"cols="30" rows="10"></textarea>
             <span asp-validation-for="Body" class="text-danger"></span>
           </div>

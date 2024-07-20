@@ -6,7 +6,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using kayip_project.Models;
 using kayip_project.Repository.IRepository;
+using kayip_project.Utility;
 using kayip_project.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -14,6 +16,7 @@ using Microsoft.Extensions.Logging;
 namespace kayip_project.Areas.Customer.Controllers
 {
     [Area("Customer")]
+    [Authorize]
     public class PostController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -27,9 +30,9 @@ namespace kayip_project.Areas.Customer.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? id)
         {
-            List<Post> postObj = _unitOfWork.Post.GetAll(includeProperties: "ApplicationUser").ToList();
+            List<Post> postObj = _unitOfWork.Post.GetAll().Where(post => post.ApplicationUser != null && post.ApplicationUser.Id == id).ToList();
             return View(postObj);
         }
         [HttpGet]

@@ -293,6 +293,10 @@
       "PackagePath": "staticwebassets\\images\\post\\2652044f-39f1-47ec-b1b1-87a96e362bef.jpg"
     },
     {
+      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\customer_post.js",
+      "PackagePath": "staticwebassets\\js\\customer_post.js"
+    },
+    {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\message.js",
       "PackagePath": "staticwebassets\\js\\message.js"
     },

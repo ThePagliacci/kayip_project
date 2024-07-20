@@ -13,12 +13,12 @@ namespace kayip_project.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu alanın doldurulması zorunludur" )]
         [MaxLength(100)]
         public string Title { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu alanın doldurulması zorunludur" )]
         public string Description { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu alanın doldurulması zorunludur" )]
         [Display(Name = "Contact Info")]
         public string ContactInfo { get; set; }
         [ValidateNever]

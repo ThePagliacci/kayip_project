@@ -43,7 +43,7 @@
   }
 
     /**
-   * ? post
+   * ? index post
    */
     const initPopovers = () => {
       const popoverTriggers = select('.question-icon', true);
@@ -69,6 +69,36 @@
         });
       });
     }
+
+
+    /**
+   * ? person's post
+   */
+    const AciklamaPopovers = () => {
+      const popoverTriggers = select('.detayli-aciklama', true);
+  
+      popoverTriggers.forEach((popoverTrigger) => {
+        const popover = new bootstrap.Popover(popoverTrigger, {
+          trigger: 'manual',
+          html: true,
+          title: 'Bu alanında lütfen aşağıdakiler için bilgi veriniz:',
+          content: "<li>En son görüldüğü zaman ve yer.</li><li>Kayıp kişinin fiziksel görünümü ve herhangi bir akıl hastalığı olup olmadığı.</li><li>polisin kayıp kişinin hakkındaki son güncellemesi.</li><li>kaybolmasının bir nedeni olduğuna inanıyorsanız.</li>",
+        });
+  
+        popoverTrigger.addEventListener('mouseenter', () => {
+          popover.show();
+        });
+  
+        popoverTrigger.addEventListener('mouseleave', () => {
+          setTimeout(() => {
+            if (!popoverTrigger.matches(':hover') && !document.querySelector('.popover:hover')) {
+              popover.hide();
+            }
+          }, 200);
+        });
+      });
+    }
+
 
   /**
    * burgerMenu
@@ -106,6 +136,7 @@
       }, true);
     }   
     initPopovers();
+    AciklamaPopovers();
 
   });
 

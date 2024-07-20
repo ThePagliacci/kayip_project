@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NiLMMr8jg4pTl7wEftiC6KTP/oE+JtK7xlCoIqp+/PA=",
+  "Hash": "g079esdU/aMtISATQzCbNF5eMfs6+1//ayo21eFKHOE=",
   "Source": "kayip_project",
   "BasePath": "_content/kayip_project",
   "Mode": "Default",
@@ -2561,6 +2561,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\post\\2652044f-39f1-47ec-b1b1-87a96e362bef.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\customer_post.js",
+      "SourceId": "kayip_project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\kayip_project\\wwwroot\\",
+      "BasePath": "_content/kayip_project",
+      "RelativePath": "js/customer_post.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\customer_post.js"
     },
     {
       "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\message.js",
