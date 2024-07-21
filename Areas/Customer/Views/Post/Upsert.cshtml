@@ -25,20 +25,20 @@
                                 <a class="question-icon detayli-aciklama" data-bs-toggle="popover" data-bs-trigger="hover">
                             <i class="bi bi-question-lg"></i>
                         </a>
-                        <textarea asp-for="Description" class="form-control mb-3"></textarea>
+                        <textarea rows="8" asp-for="Description" class="form-control mb-3 custom-textarea"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-12 form-group mb-3">
                         <label asp-for="ContactInfo" class="post-form mt-2">İleti̇şi̇m bi̇lgi̇leri̇</label>
                         <input asp-for="ContactInfo"  class="form-control">
-                        <small>✱burada paylaşacağınız bilgiler herkese açık olacaktır</small>
+                        <small class="red">✱burada paylaşacağınız bilgiler herkese açık olacaktır</small>
                         <br>
                         <span asp-validation-for="ContactInfo" class="text-danger"></span>
                     </div>
 
                    <div class="col-md-12 form-group">
-                        <label class="post-form mt-2">Konum</label>
+                        <label class="post-form mt-2">Konum</label><small class="red"> ✱Son görulduğu yer</small>
                         <div id="map" style="height: 400px;"></div>
                         <input type="hidden" id="Latitude" name="Latitude" asp-for="Latitude">
                         <span asp-validation-for="Latitude" class="text-danger"></span>

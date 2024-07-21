@@ -82,7 +82,7 @@
           trigger: 'manual',
           html: true,
           title: 'Bu alanında lütfen aşağıdakiler için bilgi veriniz:',
-          content: "<li>En son görüldüğü zaman ve yer.</li><li>Kayıp kişinin fiziksel görünümü ve herhangi bir akıl hastalığı olup olmadığı.</li><li>polisin kayıp kişinin hakkındaki son güncellemesi.</li><li>kaybolmasının bir nedeni olduğuna inanıyorsanız.</li>",
+          content: "<li>En son görüldüğü tarih.</li><li>Kayıp kişinin fiziksel görünümü ve herhangi bir akıl hastalığı olup olmadığı.</li><li>polisin kayıp kişinin hakkındaki son güncellemesi.</li><li>kaybolmasının bir nedeni olduğuna inanıyorsanız.</li>",
         });
   
         popoverTrigger.addEventListener('mouseenter', () => {

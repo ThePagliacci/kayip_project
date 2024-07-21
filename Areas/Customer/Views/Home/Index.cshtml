@@ -63,6 +63,13 @@
                         <h5 class="card-title">@obj.Title</h5>
                         <p class="card-text">@obj.Description</p>
                         İletişim bilgileri: <u>@obj.ContactInfo</u>
+                        <br>
+                        @if (obj.Latitude != 0 && obj.Longitude != 0)
+                        {
+                            var mapUrl = $"https://www.google.com/maps?q={obj.Latitude},{obj.Longitude}";
+                            <a href="@mapUrl" target="_blank">son görüldüğü yer</a>
+                        }
+
                     </div>
                 </div>
             </div> 
