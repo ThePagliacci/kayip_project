@@ -45,7 +45,6 @@ function Delete(url) {
           'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
         },
         success: function () {
-          window.location.reload();
           dataTable.ajax.reload();
         },
       });

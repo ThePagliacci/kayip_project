@@ -52,8 +52,8 @@
         const popover = new bootstrap.Popover(popoverTrigger, {
           trigger: 'manual',
           html: true,
-          title: 'Bu konuda bilginiz var mı?',
-          content: "bu gönderi̇ hakkında bi̇lgi̇ni̇z varsa lütfen <a target='_blank' href='https://www.egm.gov.tr/en-yakin-polis-merkezi'><u>poli̇sle</u></a> i̇leti̇şi̇me geçi̇ni̇z, aksi̇ takdi̇rde bu gönderi̇ni̇n hüküm ve hi̇zmetleri̇ i̇hlal etti̇ği̇ni̇ düşünüyorsaniz lütfen bi̇ze<a href='/Customer/Home/ContactUs'> <u>ulaşınız</u></a>.",
+          title: 'Bu kişi hakkında bilginiz var mı?',
+          content: "bu gönderi̇ hakkında bi̇lgi̇ni̇z varsa lütfen <a target='_blank' href='https://www.egm.gov.tr/en-yakin-polis-merkezi'><u>poli̇sle</u></a> i̇leti̇şi̇me geçi̇ni̇z, aksi̇ takdi̇rde bu gönderi̇ni̇n hüküm ve hi̇zmetleri̇ i̇hlal etti̇ği̇ni̇ düşünüyorsaniz lütfen bi̇ze<a href='/Customer/Home/ContactUs'target='_blank'> <u>ulaşınız</u></a>.",
         });
   
         popoverTrigger.addEventListener('mouseenter', () => {

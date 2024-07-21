@@ -1,4 +1,4 @@
-@model kayip_project.ViewModels.PostVM
+@model Post
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,44 +6,54 @@
 <section class="section">                          
     <div class="container">
     <div class="row mb-5 justify-content-center">
-            <h2 class="text-dark center-button">Gönderi @(Model.Post.Id != 0 ? "Güncelle" : "Oluştur")</h2>
+            <h2 class="text-dark center-button">Gönderi @(Model.Id != 0 ? "Güncelle" : "Oluştur")</h2>
         </div>
     <div class="row justify-content-center">
       <div class="col-md-10 mb-5 mb-md-0 border p-3">
             <form method="post" enctype="multipart/form-data">
-                <input asp-for="Post.Id" hidden>
-                <input asp-for="Post.Image" hidden>
+                <input asp-for="Id" hidden>
+                <input asp-for="Image" hidden>
+                 <input asp-for="ApplicationUserId" hidden>
                     <div class="col-md-12 form-group">
-                        <label asp-for="Post.Title" class="post-form mt-2">Kişinin adı</label>
-                        <input asp-for="Post.Title" class="form-control mb-3">
-                        <span asp-validation-for="Post.Title" class="text-danger"></span>
+                        <label asp-for="Title" class="post-form mt-2">Kişinin adı</label>
+                        <input asp-for="Title" class="form-control mb-3">
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-12 form-group">
-                        <label asp-for="Post.Description" class="post-form mt-2">Detaylı Açıklama</label>
+                        <label asp-for="Description" class="post-form mt-2">Detaylı Açıklama</label>
                                 <a class="question-icon detayli-aciklama" data-bs-toggle="popover" data-bs-trigger="hover">
                             <i class="bi bi-question-lg"></i>
                         </a>
-                        <textarea asp-for="Post.Description" class="form-control mb-3"></textarea>
-                        <span asp-validation-for="Post.Description" class="text-danger"></span>
+                        <textarea asp-for="Description" class="form-control mb-3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-12 form-group mb-3">
-                        <label asp-for="Post.ContactInfo" class="post-form mt-2">İleti̇şi̇m bi̇lgi̇leri̇</label>
-                        <input asp-for="Post.ContactInfo"  class="form-control">
+                        <label asp-for="ContactInfo" class="post-form mt-2">İleti̇şi̇m bi̇lgi̇leri̇</label>
+                        <input asp-for="ContactInfo"  class="form-control">
                         <small>✱burada paylaşacağınız bilgiler herkese açık olacaktır</small>
                         <br>
-                        <span asp-validation-for="Post.ContactInfo" class="text-danger"></span>
+                        <span asp-validation-for="ContactInfo" class="text-danger"></span>
+                    </div>
+
+                   <div class="col-md-12 form-group">
+                        <label class="post-form mt-2">Konum</label>
+                        <div id="map" style="height: 400px;"></div>
+                        <input type="hidden" id="Latitude" name="Latitude" asp-for="Latitude">
+                        <span asp-validation-for="Latitude" class="text-danger"></span>
+                        <input type="hidden" id="Longitude" name="Longitude" asp-for="Longitude">
+                        <span asp-validation-for="Longitude" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-12 form-group">
-                        <label asp-for="Post.Image" class="post-form mt-2">Kişinin fotoğrafı</label>
+                        <label asp-for="Image" class="post-form mt-2">Kişinin fotoğrafı</label>
                         <input type="file" name="file" class="form-control mb-3">
-                        <span asp-validation-for="Post.Image" class="text-danger"></span>
+                        <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-10 pb-3 m-8 d-flex flex-column align-items-center center-button">
-                        <button type="submit" class="readmore w-50 mb-3">@(Model.Post.Id != 0 ? "Güncelle" : "Oluştur")</button>
+                        <button type="submit" class="readmore w-50 mb-3">@(Model.Id != 0 ? "Güncelle" : "Oluştur")</button>
                         <a asp-controller="Home" asp-action="Index">Geri Dön</a>
                     </div>
             </form>
@@ -57,4 +67,7 @@
     @{
         <partial name="_ValidationScriptsPartial"/>
     }
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="~/js/customer_post.js"></script>
+    
 }

@@ -24,6 +24,11 @@ namespace kayip_project.Models
         [ValidateNever]
         public string Image { get; set; }
 
+        [Required(ErrorMessage = "Bu alanın doldurulması zorunludur" )]
+        public double Latitude { get; set; }
+        [Required(ErrorMessage = "Bu alanın doldurulması zorunludur" )]
+        public double Longitude { get; set; }
+
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]

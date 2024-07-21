@@ -41,14 +41,15 @@
                   {
              <div class="col-md-6 mb-4">
                 <div class="card">
+                  <input asp-for="@obj.Id" hidden>
                     <div class="card-icons">
                       @if (User.Identity.IsAuthenticated && obj.ApplicationUser.Email == User.Identity.Name){
-                        <a asp-controller="post" asp-action="Upsert" asp-area="Customer" class="edit-icon">
-                        <i class="bi bi-pen-fill"></i>
-                        </a>
-                        <a href="#" class="delete-icon">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                            <a href="/customer/post/upsert?id=@obj.Id" class="edit-icon">
+                            <i class="bi bi-pen-fill"></i>
+                            </a>
+                            <a onclick="Delete('/customer/post/delete/@obj.Id')" class="delete-icon">
+                                <i class="bi bi-trash"></i>
+                            </a>
                       }
                       else
                       {
@@ -61,7 +62,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@obj.Title</h5>
                         <p class="card-text">@obj.Description</p>
-                        <u>@obj.ContactInfo</u>
+                        İletişim bilgileri: <u>@obj.ContactInfo</u>
                     </div>
                 </div>
             </div> 
@@ -100,3 +101,7 @@
                   </div>
                   </div>
                 </div>
+
+@section Scripts{
+    <script src="~/js/customer_post.js"></script>
+}

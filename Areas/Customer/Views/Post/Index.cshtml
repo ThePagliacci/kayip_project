@@ -6,6 +6,7 @@
 
         <section class="section site-portfolio">                          
             <div class="container">
+           <h2  class="mb-4 neyapmaliyim">@ViewData["Title"]</h2>
         @if (Model == null || !Model.Any())
         {
             <h5 style="margin-bottom: 20%;">Henüz Gönderi yok</h5>
@@ -17,9 +18,10 @@
                 @if (User.Identity.IsAuthenticated && obj.ApplicationUser.Email == User.Identity.Name){
                 @Html.AntiForgeryToken()
                 <div class="col-md-6 mb-4">
+                    <input asp-for="@obj.Id" hidden>
                     <div class="card">
                         <div class="card-icons">
-                            <a asp-controller="post" asp-action="Upsert" asp-area="Customer" class="edit-icon">
+                            <a href="/customer/post/upsert?id=@obj.Id" class="edit-icon">
                             <i class="bi bi-pen-fill"></i>
                             </a>
                             <a onclick="Delete('/customer/post/delete/@obj.Id')" class="delete-icon">
@@ -38,11 +40,8 @@
                 
                     }
         }
-
         </div>
         </section>
-
-
 
 @section Scripts{
     <script src="~/js/customer_post.js"></script>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g079esdU/aMtISATQzCbNF5eMfs6+1//ayo21eFKHOE=",
+  "Hash": "OmV3C5mY7wk96ZVpMnALLWWFFrO7UG1icakBuN4M4OA=",
   "Source": "kayip_project",
   "BasePath": "_content/kayip_project",
   "Mode": "Default",
@@ -2561,6 +2561,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\post\\2652044f-39f1-47ec-b1b1-87a96e362bef.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\66d8057d-ce39-46fd-a545-f62b3f7103bb.png",
+      "SourceId": "kayip_project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\kayip_project\\wwwroot\\",
+      "BasePath": "_content/kayip_project",
+      "RelativePath": "images/post/66d8057d-ce39-46fd-a545-f62b3f7103bb.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\post\\66d8057d-ce39-46fd-a545-f62b3f7103bb.png"
     },
     {
       "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\customer_post.js",

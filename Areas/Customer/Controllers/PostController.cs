@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using kayip_project.Models;
@@ -30,36 +31,40 @@ namespace kayip_project.Areas.Customer.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index(string? id)
+        public IActionResult Index()
         {
-            List<Post> postObj = _unitOfWork.Post.GetAll().Where(post => post.ApplicationUser != null && post.ApplicationUser.Id == id).ToList();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            List<Post> postObj = _unitOfWork.Post.GetAll(includeProperties: "ApplicationUser")
+                .Where(post => post.ApplicationUserId == userId)
+                .ToList();
+
             return View(postObj);
         }
+
         [HttpGet]
         public IActionResult Upsert(int? id)
         {
-            PostVM postVM = new()
-            {
-                UserList = _unitOfWork.ApplicationUser.GetAll().Select(u=> new SelectListItem
-                {
-                    Text = u.FName,
-                    Value = u.Id.ToString()
-                }),
-                Post = new Post()
-            };
+            Post post = new Post();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             //create
-             if(id == null || id == 0) return View(postVM);
+             if(id == null || id == 0) 
+             {
+               post.ApplicationUserId = userId;
+                return View(post);
+             }
              else
              {
                 //update
-                postVM.Post = _unitOfWork.Post.Get(u => u.Id == id);
-                return View(postVM);
-
+                post = _unitOfWork.Post.Get(u => u.Id == id && u.ApplicationUserId == userId);
+                return View(post);
              }
         }
-
+    
         [HttpPost]
-        public IActionResult Upsert(PostVM postVM, IFormFile? file)
+        public IActionResult Upsert(Post post, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -69,9 +74,9 @@ namespace kayip_project.Areas.Customer.Controllers
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string postPath = Path.Combine(wwwRootPath, "images", "post");
 
-                    if (!string.IsNullOrEmpty(postVM.Post.Image))
+                    if (!string.IsNullOrEmpty(post.Image))
                     {
-                        string sanitizedImagePath = Regex.Replace(postVM.Post.Image, @"\.\.[\\/]", string.Empty);
+                        string sanitizedImagePath = Regex.Replace(post.Image, @"\.\.[\\/]", string.Empty);
                         string oldImagePath = Path.Combine(wwwRootPath, sanitizedImagePath);
 
                         if (Path.GetFullPath(oldImagePath).StartsWith(wwwRootPath, StringComparison.OrdinalIgnoreCase))
@@ -88,20 +93,23 @@ namespace kayip_project.Areas.Customer.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    postVM.Post.Image = Path.Combine("images", "post", fileName).Replace("\\", "/");
+                    post.Image = Path.Combine("images", "post", fileName).Replace("\\", "/");
                 }
-                if (postVM.Post.Id == 0)
+
+                post.Latitude = post.Latitude; 
+                post.Longitude = post.Longitude; 
+                if (post.Id == 0)
                 {
-                    _unitOfWork.Post.Add(postVM.Post);
+                    _unitOfWork.Post.Add(post);
                 }
                 else
                 {
-                    _unitOfWork.Post.Update(postVM.Post);
+                    _unitOfWork.Post.Update(post);
                 }
                 _unitOfWork.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
-            return View(postVM);
+            return View(post);
         }
 
         #region API CALLS
