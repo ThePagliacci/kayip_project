@@ -289,10 +289,6 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\f9c0b0bc-4527-4c28-bf54-f4cf0ca2b202.png",
-      "PackagePath": "staticwebassets\\images\\post\\f9c0b0bc-4527-4c28-bf54-f4cf0ca2b202.png"
-    },
-    {
       "Id": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\customer_post.js",
       "PackagePath": "staticwebassets\\js\\customer_post.js"
     },

@@ -15,7 +15,8 @@
           "Microsoft.EntityFrameworkCore.Tools": "8.0.6",
           "Microsoft.EntityFrameworkCore": "8.0.6",
           "Microsoft.Extensions.Identity.Stores": "8.0.6",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.2"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.2",
+          "leaflet": "0.7.3"
         },
         "runtime": {
           "kayip_project.dll": {}
@@ -595,6 +596,7 @@
           }
         }
       },
+      "leaflet/0.7.3": {},
       "Microsoft.AspNetCore.Authentication.Google/8.0.6": {
         "runtime": {
           "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll": {
@@ -2341,6 +2343,13 @@
       "sha512": "sha512-VIXB7HCUC34OoaGnO3HJVtSv2/wljPhjV7eKH4+TFPgQdJj2lvHNKY41Dtg0Bphu7X5UaXFR4zrYYyo+GNOjbA==",
       "path": "humanizer.core.zh-hant/2.14.1",
       "hashPath": "humanizer.core.zh-hant.2.14.1.nupkg.sha512"
+    },
+    "leaflet/0.7.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-R20Vv1lXuqcu6lKeHFy8KnahLxetHaKBS0S2y/mrq+phhkTtz0zIr6isxJR89LuQR9v53aKNMFVyaxLU+zagEw==",
+      "path": "leaflet/0.7.3",
+      "hashPath": "leaflet.0.7.3.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.Google/8.0.6": {
       "type": "package",

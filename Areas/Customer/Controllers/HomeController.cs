@@ -10,15 +10,13 @@ namespace kayip_projectA.Areas.Customer.Controllers;
     [Area("Customer")]
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
     private readonly IConfiguration _configuration;
     private readonly IUnitOfWork _unitOfWork;
 
-    public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, IConfiguration configuration)
+    public HomeController(IUnitOfWork unitOfWork, IConfiguration configuration)
     {
         _configuration = configuration;
         _unitOfWork = unitOfWork;
-        _logger = logger;
     }
 
     public IActionResult Index()
@@ -68,7 +66,8 @@ public class HomeController : Controller
             _unitOfWork.Save();
 
             TempData["StatusMessage"] = "Bizimle iletişime geçtiğiniz için teşekkür ederiz. E-postanız başarıyla gönderildi.";
-
+                
+            ModelState.Clear(); 
             return View();
         }
         return View();

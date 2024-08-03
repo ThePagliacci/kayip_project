@@ -36,17 +36,28 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(
         options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
     }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
+
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork> ();
-//google auth 
 
+//google auth
 var services = builder.Services;
 var configuration = builder.Configuration;
 services.AddAuthentication().AddGoogle(GoogleOptions =>
 {
     GoogleOptions.ClientId = configuration["Authentication:Google:ClientId"];
     GoogleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+});
+
+//cookie time out
+services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = ".AspNetCore.Identity.Application";
+    options.ExpireTimeSpan = TimeSpan.FromHours(6);
+    options.SlidingExpiration = true;
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; 
 });
 
 var app = builder.Build();
@@ -59,10 +70,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GDzNej8KvfkpB8415FKB78o3n8VNMRbbSaw8CTmxewg=",
+  "Hash": "jwaBUbqZjbCSPIdgW07EAZnnf1mWoF7jFySe4rf7elM=",
   "Source": "kayip_project",
   "BasePath": "_content/kayip_project",
   "Mode": "Default",
@@ -2542,25 +2542,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
-    },
-    {
-      "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\images\\post\\f9c0b0bc-4527-4c28-bf54-f4cf0ca2b202.png",
-      "SourceId": "kayip_project",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hp\\kayip_project\\wwwroot\\",
-      "BasePath": "_content/kayip_project",
-      "RelativePath": "images/post/f9c0b0bc-4527-4c28-bf54-f4cf0ca2b202.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\post\\f9c0b0bc-4527-4c28-bf54-f4cf0ca2b202.png"
     },
     {
       "Identity": "C:\\Users\\hp\\kayip_project\\wwwroot\\js\\customer_post.js",

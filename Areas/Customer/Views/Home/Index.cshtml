@@ -1,4 +1,5 @@
 ﻿@using kayip_project.Utility
+@using kayip_project.Models
 @model List<Post> 
 @{
     ViewData["Title"] = "Ana Sayfa";
@@ -47,7 +48,7 @@
                             <a href="/customer/post/upsert?id=@obj.Id" class="edit-icon">
                             <i class="bi bi-pen-fill"></i>
                             </a>
-                            <a onclick="Delete('/customer/post/delete/@obj.Id')" class="delete-icon">
+                            <a onClick="Delete('/customer/post/delete/@obj.Id')" class="delete-icon">
                                 <i class="bi bi-trash"></i>
                             </a>
                       }

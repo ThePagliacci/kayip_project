@@ -640,6 +640,9 @@
           }
         }
       },
+      "leaflet/0.7.3": {
+        "type": "package"
+      },
       "Microsoft.AspNetCore.Authentication.Google/8.0.6": {
         "type": "package",
         "compile": {
@@ -3700,6 +3703,25 @@
         "lib/netstandard1.0/zh-Hant/Humanizer.resources.dll",
         "lib/netstandard2.0/zh-Hant/Humanizer.resources.dll",
         "logo.png"
+      ]
+    },
+    "leaflet/0.7.3": {
+      "sha512": "R20Vv1lXuqcu6lKeHFy8KnahLxetHaKBS0S2y/mrq+phhkTtz0zIr6isxJR89LuQR9v53aKNMFVyaxLU+zagEw==",
+      "type": "package",
+      "path": "leaflet/0.7.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Content/images/layers-2x.png",
+        "content/Content/images/layers.png",
+        "content/Content/images/marker-icon-2x.png",
+        "content/Content/images/marker-icon.png",
+        "content/Content/images/marker-shadow.png",
+        "content/Content/leaflet.css",
+        "content/Scripts/leaflet-0.7.3.js",
+        "content/Scripts/leaflet-0.7.3.min.js",
+        "leaflet.0.7.3.nupkg.sha512",
+        "leaflet.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.Google/8.0.6": {
@@ -8280,7 +8302,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.6",
       "Microsoft.EntityframeworkCore >= 8.0.6",
       "Microsoft.Extensions.Identity.Stores >= 8.0.6",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.2"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.2",
+      "leaflet >= 0.7.3"
     ]
   },
   "packageFolders": {
@@ -8355,6 +8378,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[8.0.2, )"
+          },
+          "leaflet": {
+            "target": "Package",
+            "version": "[0.7.3, )"
           }
         },
         "imports": [

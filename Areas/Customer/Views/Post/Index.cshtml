@@ -1,5 +1,4 @@
 @model List<Post> 
-
 @{
     ViewData["Title"] = "Gönderlerim";
 }
@@ -13,7 +12,7 @@
         }
         else
         {
-            @foreach(var obj in Model)
+            @foreach(var obj in Model) 
             {
                 @if (User.Identity.IsAuthenticated && obj.ApplicationUser.Email == User.Identity.Name){
                 @Html.AntiForgeryToken()
@@ -32,7 +31,14 @@
                         <div class="card-body">
                             <h5 class="card-title">@obj.Title</h5>
                             <p class="card-text">@obj.Description</p>
-                            <u>@obj.ContactInfo</u>
+                        İletişim bilgileri: <u>@obj.ContactInfo</u>
+                        <br>
+                        @if (obj.Latitude != 0 && obj.Longitude != 0)
+                        {
+                            var mapUrl = $"https://www.google.com/maps?q={obj.Latitude},{obj.Longitude}";
+                            <a href="@mapUrl" target="_blank">son görüldüğü yer</a>
+                        }
+
                         </div>
                     </div>
                 </div>   
