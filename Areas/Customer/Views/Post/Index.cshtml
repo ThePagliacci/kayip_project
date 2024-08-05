@@ -20,6 +20,11 @@
                     <input asp-for="@obj.Id" hidden>
                     <div class="card">
                         <div class="card-icons">
+                        @if (obj.Latitude != 0 && obj.Longitude != 0)
+                        {
+                            var mapUrl = $"https://www.google.com/maps?q={obj.Latitude},{obj.Longitude}";
+                            <a href="@mapUrl" target="_blank"><a href="@mapUrl" target="_blank"><i class="bi bi-geo-alt-fill"></i></a></a>
+                        }
                             <a href="/customer/post/upsert?id=@obj.Id" class="edit-icon">
                             <i class="bi bi-pen-fill"></i>
                             </a>
@@ -31,14 +36,8 @@
                         <div class="card-body">
                             <h5 class="card-title">@obj.Title</h5>
                             <p class="card-text">@obj.Description</p>
-                        İletişim bilgileri: <u>@obj.ContactInfo</u>
-                        <br>
-                        @if (obj.Latitude != 0 && obj.Longitude != 0)
-                        {
-                            var mapUrl = $"https://www.google.com/maps?q={obj.Latitude},{obj.Longitude}";
-                            <a href="@mapUrl" target="_blank">son görüldüğü yer</a>
-                        }
-
+                          <span class="İletişim-bilgileri">İletişim bilgileri: @obj.ContactInfo</span>
+                       
                         </div>
                     </div>
                 </div>   
@@ -47,7 +46,7 @@
                     }
         }
         </div>
-        </section>
+        </section> 
 
 @section Scripts{
     <script src="~/js/customer_post.js"></script>

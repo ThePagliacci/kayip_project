@@ -175,6 +175,15 @@ h6 {
   background: #000;
 }
 
+.İletişim-bilgileri {
+  font-size: 0.875rem;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-top: 10px;
+}
+
+
 /*contact us page*/
 .custom-textarea {
   height: 250px;

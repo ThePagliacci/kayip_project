@@ -44,6 +44,11 @@
                 <div class="card">
                   <input asp-for="@obj.Id" hidden>
                     <div class="card-icons">
+                      @if (obj.Latitude != 0 && obj.Longitude != 0)
+                      {
+                        var mapUrl = $"https://www.google.com/maps?q={obj.Latitude},{obj.Longitude}";
+                        <a href="@mapUrl" target="_blank"><i class="bi bi-geo-alt-fill"></i></a>
+                      }
                       @if (User.Identity.IsAuthenticated && obj.ApplicationUser.Email == User.Identity.Name){
                             <a href="/customer/post/upsert?id=@obj.Id" class="edit-icon">
                             <i class="bi bi-pen-fill"></i>
@@ -55,7 +60,7 @@
                       else
                       {
                         <a class="question-icon" data-bs-toggle="popover" data-bs-trigger="hover">
-                            <i class="bi bi-question-lg"></i>
+                            <i class="bi bi-question-circle"></i>
                         </a>
                       }
                     </div>
@@ -63,13 +68,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@obj.Title</h5>
                         <p class="card-text">@obj.Description</p>
-                        İletişim bilgileri: <u>@obj.ContactInfo</u>
-                        <br>
-                        @if (obj.Latitude != 0 && obj.Longitude != 0)
-                        {
-                            var mapUrl = $"https://www.google.com/maps?q={obj.Latitude},{obj.Longitude}";
-                            <a href="@mapUrl" target="_blank">son görüldüğü yer</a>
-                        }
+                          <span class="İletişim-bilgileri">İletişim bilgileri: @obj.ContactInfo</span>
 
                     </div>
                 </div>
@@ -110,6 +109,6 @@
                   </div>
                 </div>
 
-@section Scripts{
+@section Scripts{ 
     <script src="~/js/customer_post.js"></script>
 }

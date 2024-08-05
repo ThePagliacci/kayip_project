@@ -54,17 +54,18 @@
                         <button type="submit" class="readmore w-50 mb-3">@(Model.Id != 0 ? "Güncelle" : "Oluştur")</button>
                         <a asp-controller="Home" asp-action="Index">Geri Dön</a>
                     </div>
-            </form>
+            </form> 
         </div>
                 </div>
     </div>
 </section>
 
 
-@section Scripts{
+@section Scripts{ 
     @{
         <partial name="_ValidationScriptsPartial"/>
 
             <script src="~/js/customer_post.js"></script>
+            <script src="~/js/map.js"></script>
     }
 }
