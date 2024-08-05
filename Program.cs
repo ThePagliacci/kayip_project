@@ -54,7 +54,7 @@ services.AddAuthentication().AddGoogle(GoogleOptions =>
 services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.Name = ".AspNetCore.Identity.Application";
-    options.ExpireTimeSpan = TimeSpan.FromHours(6);
+    options.ExpireTimeSpan = TimeSpan.FromHours(4);
     options.SlidingExpiration = true;
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always; 

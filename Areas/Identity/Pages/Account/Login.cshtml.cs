@@ -130,6 +130,11 @@ namespace kayip_project.Areas.Identity.Pages.Account
 
                     if(result.Succeeded)
                     {
+                        if (Input.RememberMe)
+                        {
+                            await SignInUserAsync(Input.Email, TimeSpan.FromDays(14)); // Longer expiration
+                        }
+
                         _logger.LogInformation("Kullanıcı giriş yapmış.");
                         return LocalRedirect(returnUrl);
                     }
@@ -158,5 +163,17 @@ namespace kayip_project.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
+        private async Task SignInUserAsync(string email, TimeSpan expiration)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.Add(expiration),
+                IsPersistent = true
+            };
+            await _signInManager.SignInAsync(user, authProperties);
+        }
+
     }
 }
