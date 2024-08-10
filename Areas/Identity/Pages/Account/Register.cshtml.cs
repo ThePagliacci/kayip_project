@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading; 
 using System.Threading.Tasks;
+using AspNetCore.ReCaptcha;
 using kayip_project.Models;
 using kayip_project.Utility;
 using Microsoft.AspNetCore.Authentication;
@@ -27,6 +28,7 @@ using Microsoft.Extensions.Logging;
 
 namespace kayip_project.Areas.Identity.Pages.Account
 {
+    [ValidateReCaptcha("Register", ErrorMessage ="reCAPTCHA doğrulaması başarısız oldu.")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

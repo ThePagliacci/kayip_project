@@ -1,4 +1,5 @@
 ﻿@page
+@using AspNetCore.ReCaptcha
 @model RegisterModel
 @{
     ViewData["Title"] = "Kayıt Ol";
@@ -20,8 +21,8 @@
           <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
 
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="row gy-3">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                         <div class="col-md-6 form-group">
                 <label asp-for="Input.FName">Adı</label>
                 <input asp-for="Input.FName" class="form-control" />
@@ -46,7 +47,7 @@
                <label asp-for="Input.Email">E posta</label>
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div> 
+            </div>  
             <div class="col-md-12 form-group">
                 <label asp-for="Input.Password">Şifre</label>
                 <input id="password" asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"/>
@@ -67,7 +68,8 @@
                     <a href="#" data-bs-toggle="modal" data-bs-target="#poli-modal"><label asp-for="Input.PolicyAccepted">Policy Terms</label></a>
                         <span asp-validation-for="Input.PolicyAccepted" class="text-danger"></span>
               </div>
-
+                @Html.ReCaptcha()
+                <div id="recaptcha-er" class="text-danger" style="display: none;"></div>
 
               <div class="modal fade" id="poli-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
                 <div class="modal-dialog">
@@ -97,7 +99,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae esse aliquid rem eum hic, sed voluptate nisi, ab non repellat recusandae expedita neque reprehenderit laboriosam voluptatem provident aut aspernatur! Obcaecati!
                     </div>
                     <div class="modal-foot">
-                        <button class="m-4 btn btn-primary">submit</button>
+                        <button id="reg-submit" class="m-4 btn btn-primary">submit</button>
                     </div>
                 </div>
                 </div>
@@ -105,7 +107,7 @@
 
 
             <div class="col-md-10 m-8 d-flex flex-column align-items-center center-button">
-            <button id="registerSubmit" type="submit" class="readmore w-75 mb-3">Kayıt Ol</button>
+            <button id="registerSubmit" type="submit" class="readmore w-50 mb-3">Kayıt Ol</button>
           </div>
            </div>
         </form>
@@ -126,7 +128,7 @@
                                 @foreach (var provider in Model.ExternalLogins!)
                                 {
                                     <div class="col-md-10 m-8 d-flex flex-column align-items-center center-button">
-                                    <button type="submit" class="readmore w-75 mb-3" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    <button type="submit" class="readmore w-50 mb-3" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                                     </div>
                                 }
                     </form>
@@ -150,6 +152,7 @@
     @{
     <partial name="_ValidationScriptsPartial" />
     }
+    <script src="~/js/recaptcha.js"></script>
 }
 <script>
     const passwordField = document.getElementById('password');
@@ -158,3 +161,4 @@
     passwordField.addEventListener('paste', e=> e.preventDefault());
     confirmPasswordField.addEventListener('paste', e=> e.preventDefault());
 </script>
+

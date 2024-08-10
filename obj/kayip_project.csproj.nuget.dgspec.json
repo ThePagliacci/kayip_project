@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\kayip_project\\kayip_project.csproj": {}
+    "c:\\Users\\hp\\kayip_project\\kayip_project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\kayip_project\\kayip_project.csproj": {
+    "c:\\Users\\hp\\kayip_project\\kayip_project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\kayip_project\\kayip_project.csproj",
+        "projectUniqueName": "c:\\Users\\hp\\kayip_project\\kayip_project.csproj",
         "projectName": "kayip_project",
-        "projectPath": "C:\\Users\\hp\\kayip_project\\kayip_project.csproj",
+        "projectPath": "c:\\Users\\hp\\kayip_project\\kayip_project.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\kayip_project\\obj\\",
+        "outputPath": "c:\\Users\\hp\\kayip_project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AspNetCore.ReCaptcha": {
+              "target": "Package",
+              "version": "[1.8.2, )"
+            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[8.0.6, )"

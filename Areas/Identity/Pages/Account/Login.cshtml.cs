@@ -16,10 +16,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using System.Reflection.Metadata.Ecma335;
+using AspNetCore.ReCaptcha;
+using Newtonsoft.Json.Linq;
 
 
 namespace kayip_project.Areas.Identity.Pages.Account
 {
+    [ValidateReCaptcha("Login", ErrorMessage ="reCAPTCHA doğrulaması başarısız oldu.")]
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -38,16 +41,12 @@ namespace kayip_project.Areas.Identity.Pages.Account
         public string RecaptchaSecreteKey => _configuration["reCAPTCHA:SecretKey"];
 
 
-
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
-
-        [BindProperty]
-        public string? RecaptchaToken { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -81,7 +80,6 @@ namespace kayip_project.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "E-posta alanı zorunludur.")]
             [EmailAddress(ErrorMessage = "Geçersiz e-posta formatı.")]
             public string Email { get; set; }
-
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -114,8 +112,8 @@ namespace kayip_project.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
- 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+
+       public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
 
@@ -127,7 +125,6 @@ namespace kayip_project.Areas.Identity.Pages.Account
                     int accessFailedCount = await _userManager.GetAccessFailedCountAsync(user);
                     int maxFailedAccessAttempts = _userManager.Options.Lockout.MaxFailedAccessAttempts;
                     var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-
                     if(result.Succeeded)
                     {
                         if (Input.RememberMe)

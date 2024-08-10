@@ -9,6 +9,7 @@ using kayip_project.Repository;
 using Microsoft.AspNetCore.Authentication.Google;
 using kayip_project.Models;
 using Microsoft.AspNetCore.Mvc;
+using AspNetCore.ReCaptcha;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,9 @@ builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 });
+
+ReplacePlaceholdersWithSecrets(builder.Configuration);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -49,6 +53,8 @@ services.AddAuthentication().AddGoogle(GoogleOptions =>
     GoogleOptions.ClientId = configuration["Authentication:Google:ClientId"];
     GoogleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
 });
+
+builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
 
 //cookie time out
 services.ConfigureApplicationCookie(options =>
@@ -81,3 +87,11 @@ app.MapControllerRoute(
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void ReplacePlaceholdersWithSecrets(IConfiguration configuration)
+{
+    var recaptchaSection = configuration.GetSection("ReCaptcha");
+
+    recaptchaSection["SiteKey"] = configuration["ReCaptcha:SiteKey"] ?? recaptchaSection["SiteKey"];
+    recaptchaSection["SecretKey"] = configuration["ReCaptcha:SecretKey"] ?? recaptchaSection["SecretKey"];
+}

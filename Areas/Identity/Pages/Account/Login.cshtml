@@ -1,4 +1,5 @@
 ﻿@page
+@using AspNetCore.ReCaptcha
 @model LoginModel
 
 @{
@@ -20,9 +21,8 @@
             <div class="row justify-content-center">
             <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
             <form id="account" method="post" >
-                <input type="hidden" name="" id="recaptchaTokenInputId" asp-for="RecaptchaToken">
+                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="row gy-3">
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="col-md-12 form-group">
                     <label asp-for="Input.Email" class="form-label">E posta</label>
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
@@ -33,16 +33,17 @@
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true"/>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-
                 <div class="checkbox">
                     <label asp-for="Input.RememberMe" class="form-label">
                         <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @*need sessions implementation*@
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
                 </div>
+                @Html.ReCaptcha()
+                <div id="recaptcha-error" class="text-danger" style="display: none;"></div>
+
                   <div class="col-md-10 m-8 d-flex flex-column align-items-center center-button">
-                    <button id="login-submit" type="submit" class="readmore w-75 mb-3">Log in</button>
+                    <button id="login-submit" type="submit" class="readmore w-50 mb-3">Log in</button>
                 </div>
         </div>
             </form>

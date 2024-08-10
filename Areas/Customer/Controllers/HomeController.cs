@@ -20,7 +20,7 @@ public class HomeController : Controller
     }
 
     public IActionResult Index()
-    {
+    {        
         List<Post> postObj = _unitOfWork.Post.GetAll(includeProperties: "ApplicationUser").ToList();
         return View(postObj);
     }

@@ -3,6 +3,7 @@
 2- apply prove you are not a robot 
 captcha keys in register
 
-3-in admin panel user edit get method: role list always shows admin
 
-6-client side validation for terms and services
+3-client side validation for terms and services
+
+4- server side validation's message for recaptch is unable to be displayed
