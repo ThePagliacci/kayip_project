@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\hp\\kayip_project\\kayip_project.csproj": {}
+    "C:\\Users\\hp\\kayip_project\\kayip_project.csproj": {}
   },
   "projects": {
-    "c:\\Users\\hp\\kayip_project\\kayip_project.csproj": {
+    "C:\\Users\\hp\\kayip_project\\kayip_project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\hp\\kayip_project\\kayip_project.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\kayip_project\\kayip_project.csproj",
         "projectName": "kayip_project",
-        "projectPath": "c:\\Users\\hp\\kayip_project\\kayip_project.csproj",
+        "projectPath": "C:\\Users\\hp\\kayip_project\\kayip_project.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\hp\\kayip_project\\obj\\",
+        "outputPath": "C:\\Users\\hp\\kayip_project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",

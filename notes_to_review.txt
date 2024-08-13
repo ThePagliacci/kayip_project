@@ -7,3 +7,5 @@ captcha keys in register
 3-client side validation for terms and services
 
 4- server side validation's message for recaptch is unable to be displayed
+
+***5-google auth varification and for the app logo as well*****
