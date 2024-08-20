@@ -160,7 +160,15 @@ namespace kayip_project.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (!Input.TermsAccepted)
+            {
+               ModelState.AddModelError(string.Empty, "Şartlar ve Hizmetleri kabul etmelisiniz.");
+            }
+            if (!Input.PolicyAccepted)
+            {
+              ModelState.AddModelError(string.Empty, "Gizlilik Politikası Şartlarını kabul etmelisiniz.");
+            }     
+            else if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
@@ -214,14 +222,6 @@ namespace kayip_project.Areas.Identity.Pages.Account
                     {
                         ModelState.AddModelError(string.Empty, "Bu e-posta adresi zaten kullanılmaktadır.");
                         break; // Exit the loop after adding the specific error message
-                    }
-                    if (!Input.TermsAccepted)
-                    {
-                        ModelState.AddModelError(string.Empty, "Şartlar ve Hizmetleri kabul etmelisiniz.");
-                    }
-                    if (!Input.PolicyAccepted)
-                    {
-                        ModelState.AddModelError(string.Empty, "Gizlilik Politikası Şartlarını kabul etmelisiniz.");
                     }
                     else if (error.Code.Contains("Password"))
                     {

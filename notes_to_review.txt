@@ -1,11 +1,8 @@
 1- when deploying the website (google) authorized & recaptcha redirect url should be updated
 
-2- apply prove you are not a robot 
-captcha keys in register
+2-client side validation for terms and services
 
+3- server side validation's message for recaptch is unable to be displayed
 
-3-client side validation for terms and services
-
-4- server side validation's message for recaptch is unable to be displayed
-
-***5-google auth varification and for the app logo as well*****
+***4-google auth varification and for the app logo as well*****
+5- private policy and terms of services links to page needs to be updated

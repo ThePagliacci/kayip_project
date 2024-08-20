@@ -61,11 +61,11 @@
 
             <div class="col-md-12 form-group">
                       <input asp-for="Input.TermsAccepted" type="checkbox" aria-required="true" />
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#serv-modal"><label asp-for="Input.TermsAccepted">Terms and Services</label></a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#serv-modal"><label asp-for="Input.TermsAccepted">Hizmet Koşulları</label></a>
                         <span asp-validation-for="Input.TermsAccepted" class="text-danger"></span>
                         
                     <input asp-for="Input.PolicyAccepted" type="checkbox" aria-required="true" />
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#poli-modal"><label asp-for="Input.PolicyAccepted">Policy Terms</label></a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#poli-modal"><label asp-for="Input.PolicyAccepted">Gizlilik Politikası</label></a>
                         <span asp-validation-for="Input.PolicyAccepted" class="text-danger"></span>
               </div>
                 @Html.ReCaptcha()
@@ -75,15 +75,11 @@
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title">policy title</h5>
+                        <h5 class="modal-title" id="modal-title">Gizlilik Politikası</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae esse aliquid rem eum hic, sed voluptate nisi, ab non repellat recusandae expedita neque reprehenderit laboriosam voluptatem provident aut aspernatur! Obcaecati!
-                    </div>
-                    <div class="modal-foot">
-                        <button class="m-4 btn btn-primary">submit</button>
-                    </div>
+                    @Html.Partial("_PrivacyPolicy")
+
                 </div>
                 </div>
               </div>
@@ -92,15 +88,10 @@
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title">terms of services title</h5>
+                        <h5 class="modal-title" id="modal-title">Hizmet Koşulları</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae esse aliquid rem eum hic, sed voluptate nisi, ab non repellat recusandae expedita neque reprehenderit laboriosam voluptatem provident aut aspernatur! Obcaecati!
-                    </div>
-                    <div class="modal-foot">
-                        <button id="reg-submit" class="m-4 btn btn-primary">submit</button>
-                    </div>
+                    @Html.Partial("_TermsofService")
                 </div>
                 </div>
               </div>
