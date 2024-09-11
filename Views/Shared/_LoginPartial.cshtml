@@ -6,9 +6,9 @@
 @if (SignInManager.IsSignedIn(User))
 {
 
-    <div class="col-md-2 d-none d-md-block">
+    <div class="col-md-2 nav-item">
         <h3>
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = " Customer" })">
          <button id="logout" type="submit" class="nav-link navbar-link">Çıkış yap</button> 
         </form>
           </h3>
@@ -16,12 +16,12 @@
 }
 else
 {
-            <div class="col-md-2 d-none d-md-block">
+            <div class="col-md-2 nav-item">
             <h3>
             <a id="login" asp-area="Identity" asp-page="/Account/Login">Giriş yap</a>
           </h3>
          </div>
-            <div class="col-md-2 d-none d-md-block">
+            <div class="col-md-2 nav-item">
             <h3>
             <a id="register" asp-area="Identity" asp-page="/Account/Register">kayıt ol</a>
           </h3>

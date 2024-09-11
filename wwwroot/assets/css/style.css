@@ -1,96 +1,60 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 * {
   font-family: "Noto Sans", sans-serif;
-
+  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
 }
 body {
   color: #000;
+  display: grid;
+  height: 100vh;
+  grid-template-rows: auto 1fr auto;
 }
 a {
   color: #000;
   text-decoration: none;
-  margin-bottom: 5px;
+  margin-bottom: 0.313rem;
 }
 h5 {
-  font-size: large;
+  /**font-size: 1.25rem; **/
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 a:hover {
   color: #000;
 }
 .center-button {
-  display:flex;
+  display: flex;
   justify-content: center;
   width: 70%;
-  margin:auto;
+  margin: auto;
 }
 
 .section h2 {
-  font-size: 50px;
+  font-size: 3rem;
   font-weight: 800;
 }
 .section {
   padding: 4rem 0;
 }
 
-.filters a {
-  text-decoration: none;
-  color: #000;
-  display: inline-block;
-  padding-left: 10px;
-  padding-right: 10px;
-  position: relative;
-}
-
-.filters a:hover,
-.filters a:focus,
-.filters a:active {
-  text-decoration: none;
-}
-
-.filters a:hover:before {
-  content: "";
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 0;
-  height: 1px;
-  background-color: #000;
-}
-
-.filters a.active {
-  color: #000;
-}
-
-.filters a.active:before {
-  content: "";
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 0;
-  height: 1px;
-  background-color: #000;
-}
 h6 {
-  padding-top: 10px;
+  padding-top: 0.625rem;
   color: #c00;
 }
 .h3 {
-  font-size: 20px;
+  /**font-size: 1.25rem;**/
 }
 .section h3 {
   font-weight: 600;
 }
 .h4 {
-  font-size: 16px;
+  /**font-size: 1rem;**/
 }
 .container h4 {
   color: #c00;
-  margin-bottom: 20px;
-}
-.heading {
-  font-size: 28px;
+  margin-bottom: 1.25rem;
 }
 
 .readmore {
@@ -98,22 +62,21 @@ h6 {
   display: inline-block;
   border: 1px solid #000;
   padding: 10px 15px;
-  font-size: 12px;
+  /**font-size: 0.75rem;**/
   text-transform: uppercase;
   color: #000;
   transition: 0.2s all ease;
   font-weight: 700;
 }
-#ch:checked ~ .index-content
-{
+
+#ch:checked ~ .index-content {
   display: block;
   margin-bottom: 1.5rem;
-} 
-#ch:checked ~ .checked
-{
+}
+#ch:checked ~ .checked {
   display: none;
 }
-.index-content{
+.index-content {
   display: none;
 }
 .readmore:active,
@@ -127,32 +90,10 @@ h6 {
   text-decoration: none;
   background: #000;
 }
-.sticky-content {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-  /* required */
-}
-
-.list-line li {
-  margin-bottom: 10px;
-  position: relative;
-  padding-left: 30px;
-}
-
-.list-line li:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.7rem;
-  width: 10px;
-  height: 2px;
-  background: #000;
-}
 
 .form-control {
   border-radius: 0;
-  background:#ebecec;
+  background: #ebecec;
   border: 1px solid transparent;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
@@ -166,23 +107,13 @@ h6 {
   border: 1px solid transparent;
 }
 
-.custom-progress {
-  height: 7px;
-  border-radius: 0;
-}
-
-.custom-progress .progress-bar {
-  background: #000;
-}
-
 .İletişim-bilgileri {
-  font-size: 0.875rem;
+  /**font-size: 0.875rem;**/
   color: #333;
   font-weight: 500;
   display: block;
   margin-top: 10px;
 }
-
 
 /*contact us page*/
 .custom-textarea {
@@ -209,33 +140,33 @@ h6 {
 }
 
 .custom-navmenu .custom-menu,
-.custom-navmenu .custom-menu li {
+.custom-navmenu {
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-.custom-navmenu .custom-menu li {
+.custom-navmenu {
   margin-bottom: 0;
-  font-size: 20px;
+  font-size:  0.625rem;
 }
 
-.custom-navmenu .custom-menu li a {
+.custom-navmenu a {
   color: #fff;
-  padding: 10px 0 !important;
+  padding: 0.625rem 0 !important;
 }
 
-.custom-navmenu .custom-menu li a:hover {
+.custom-navmenu a:hover {
   text-decoration: none;
 }
 
-.custom-navmenu .custom-menu li.active a {
+.custom-navmenu.active a {
   text-decoration: underline;
 }
 
 .custom-navmenu h3 {
-  font-size: 20px;
   color: #fff;
+  font-size: 1.25rem;
 }
 
 .custom-navmenu p {
@@ -250,27 +181,107 @@ h6 {
   color: #fff;
 }
 
-/* Custom Navbar */
-.custom-navbar {
-  padding-top: 50px;
-  width: 100%;
+.custom-navmenu .nav-link {
+  color: rgba(255, 255, 255, 0.7);
 }
 
-@media (max-width: 780px) {
-  .custom-navbar > .container {
-    padding-right: 0;
-    padding-left: 0;
+.custom-navmenu .nav-link:hover,
+.custom-navmenu .nav-link.active {
+  color: #fff;
+}
+
+.custom-navmenu .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.custom-navmenu .col-md-2 {
+  flex: 1 1 auto;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1399px) {
+
+  .custom-navmenu .col-md-2 {
+    flex: 1 1 33.333%;
+    margin-bottom: 1rem;
+    padding-left: 3rem;
+  }
+  .py-md-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 1rem !important;
   }
 }
 
-.custom-navbar .navbar-brand {
-  font-size: 1.7rem;
+@media (max-width: 767px) and (min-width: 539px) {
+  .custom-navmenu .col-md-2 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  #logoutForm {
+    display: inline-block;
+  }
+
+  #logout {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
 }
 
+@media (max-width: 480px) and (min-width: 389px) {
+  .custom-navmenu .col-md-2 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  #logoutForm {
+    display: inline-block;
+  }
+
+  #logout {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+}
+
+@media (max-width: 767px) {
+  .custom-navmenu .col-md-2 {
+    flex: 1  1  33.333%;
+  }
+  .custom-navmenu .nav {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 768px) {
+  .custom-navmenu .nav {
+    justify-content: space-between;
+  }
+}
+
+/* Custom Navbar  ***/
+.custom-navbar {
+  padding-top: 3.125rem;
+  width: 100%;
+}
+
+.custom-navbar .navbar-brand {
+  /**font-size: 1.7rem;**/
+}
 /* Burger */
 .burger {
-  width: 28px;
-  height: 32px;
+  width: 1.75rem;
+  height: 2rem;
   cursor: pointer;
   position: relative;
 }
@@ -279,10 +290,10 @@ h6 {
 .burger span,
 .burger:after {
   width: 100%;
-  height: 2px;
+  height: 0.125rem;
   display: block;
   background: #000;
-  border-radius: 2px;
+  border-radius: 0.125rem;
   position: absolute;
   opacity: 1;
 }
@@ -301,15 +312,15 @@ h6 {
 }
 
 .burger:before {
-  top: 4px;
+  top: 0.25rem;
 }
 
 .burger span {
-  top: 15px;
+  top: 0.938rem;
 }
 
 .burger:after {
-  top: 26px;
+  top: 1.625rem;
 }
 
 /*gonderlerim*/
@@ -324,11 +335,10 @@ h6 {
 
 .card-icons a {
   color: #000; /* Set the icon color */
-  font-size: 18px; /* Set the icon size */
+  /*font-size: 1.125rem;  Set the icon size */
   text-decoration: none;
 }
-.card
-{
+.card {
   max-width: 100%;
   width: 100%;
   flex-direction: row;
@@ -341,29 +351,24 @@ h6 {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
 }
 
-.card-img-top
-{
+.card-img-top {
   padding: 20px;
   max-width: 20%;
 }
-.index-image
-{
+.index-image {
   padding: 20px;
   max-width: 50%;
 }
 /*upsert*/
 
-
-
-.post-form
-{
-  font-size: 17px;
+.post-form {
+  /**font-size: 1.063rem;**/
   font-weight: 600;
   color: #000;
 }
 /**/
 
-/*gonderlerim*/
+/*gonderlerim end*/
 
 /*what to do page */
 /* General styling for accordion columns */
@@ -379,7 +384,7 @@ h6 {
 }
 
 /* Styling for accordion buttons when not collapsed */
-.accordion-button:not(.collapsed) { 
+.accordion-button:not(.collapsed) {
   color: #000;
   background-color: #fff;
   border: none;
@@ -398,7 +403,7 @@ h6 {
   padding: 25px 20px;
   color: #000;
   background-color: #fff;
-  font-size: 20px;
+  /**font-size: 1.25rem;**/
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -414,8 +419,8 @@ h6 {
   padding: 15px;
   border: 1px solid #ddd;
   border-top: none;
-  font-size: 16px;
-  line-height: 1.6;
+  /**font-size: 1rem;**/
+  line-height: 1.6em;
   color: #333;
 }
 
@@ -434,7 +439,7 @@ h6 {
 .accordion-body span {
   display: block;
   margin-bottom: 10px;
-  font-size: 16px;
+  /**font-size: 1rem;**/
   color: #555;
   margin-left: 20px;
 }
@@ -442,24 +447,25 @@ h6 {
 /* Styling for accordion headers */
 .accordion-header h2 {
   margin-bottom: 0;
-  font-size: 20px;
+  /**font-size: 1.25rem;**/
   font-weight: bold;
   color: #333;
 }
 
-/**/
+/*end*/
 
 /* Hover */
-.section a:hover, .red{
+.section a:hover,
+.red {
   color: #c00;
 }
 
 .burger:hover:before {
-  top: 7px;
+  top: 0.438rem;
 }
 
 .burger:hover:after {
-  top: 23px;
+  top: 1.438rem;
 }
 
 /* Click */
@@ -484,14 +490,11 @@ h6 {
   outline: none;
 }
 
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
 .footer {
   padding: 0 0 4rem 0;
-  position: relative;
   left: 0;
   bottom: 0;
+  position: relative;
   width: 100%;
 }
 
@@ -499,28 +502,6 @@ h6 {
   color: #000;
 }
 
-.social a {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #f8f9fa;
-  position: relative;
-  text-align: center;
-  color: #0d1e2d;
-}
-
-.social a span {
-  display: inline-block;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.social a:hover {
-  color: #000;
-}
 ul li {
-  margin: 4px 0px 0px;
+  margin: 0.25rem 0rem 0rem;
 }

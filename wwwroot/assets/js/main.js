@@ -102,12 +102,16 @@
 
   /**
    * burgerMenu
-   */
+  
   const burgerMenu = select('.burger')
   on('click', '.burger', function(e) {
     burgerMenu.classList.toggle('active');
   })
-
+ */
+  const burgerMenu = select('.burger')
+  on('click', '.burger', function(e) {
+    burgerMenu.classList.toggle('active');
+  })
   /**
    * Porfolio isotope and filter
    */

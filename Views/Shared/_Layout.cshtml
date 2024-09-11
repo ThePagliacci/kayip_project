@@ -29,28 +29,30 @@
     <header>
     <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
       <div class="container py-2 py-md-5">
-        <div class="row align-items-start">
-            <div class="col-md-2 d-none d-md-block">
+        <div class="row">
+            <div class="col-md-2 nav-item">
                 <h3>
-                  <a asp-controller="Home" asp-area="Customer" asp-action="Index">
-                    Ana sayfa
-                  </a></h3>
+                                <a asp-controller="Home" asp-area="Customer" asp-action="WhatToDo">
+              Ne yapmam gerekiyor?
+          </a>
+                </h3>
               </div>
-          <div class="col-md-2 d-none d-md-block">
+          <div class="col-md-2 nav-item">
             <h3>
               <a asp-controller="Home" asp-area="Customer" asp-action="Help">
-                Nasıl yardımcı olabilirim?
+                Yardım edebilir miyim?
               </a>
               </h3>
           </div>
-          <div class="col-md-2 d-none d-md-block">
-            <h3><a asp-controller="Home" asp-area="Customer" asp-action="WhatToDo">
-              ne yapmalıyım?
-          </a></h3>
+          <div class="col-md-2 nav-item">
+            <h3><a asp-controller="Home" asp-area="Customer" asp-action="Index">
+                    Ana sayfa
+                  </a>
+          </h3>
           </div>
              @if(User.IsInRole(SD.Admin_Role))
             {
-            <div class="col-md-2 d-none d-md-block">
+            <div class="col-md-2 nav-item">
             <h3><a  asp-area="Admin" asp-controller="DashBoard" asp-action="Index">
               Admin Panel
           </a></h3>
@@ -58,15 +60,16 @@
            }
            @if(User.IsInRole(SD.Admin_Role) || User.IsInRole(SD.User_Role))
            {
-            <div class="col-md-2 d-none d-md-block">
+            <div class="col-md-2 nav-item">
             <h3><a asp-area="Customer" asp-controller="Post" asp-action="Index" >
              Gönderilerim
           </a></h3>
-          </div>
+          </div> 
            }
-          <div class="col-md-2 d-none d-md-block">
+          <div class="col-md-2 nav-item">
             <h3>
-            <a asp-controller="Home" asp-area="Customer" asp-action="ContactUs">iletişim</a></h3>
+            <a asp-controller="Home" asp-area="Customer" asp-action="ContactUs">iletişim</a>
+            </h3>
           </div>
           
               <partial name="_LoginPartial"/>
@@ -74,7 +77,7 @@
       </div>
     </div>
 
-    <nav class="navbar navbar-light custom-navbar">
+    <nav class="navbar navbar-light custom-navbar"> 
       <div class="container">
         <a
           href="#"
