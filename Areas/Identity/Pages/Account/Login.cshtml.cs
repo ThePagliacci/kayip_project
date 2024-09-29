@@ -39,8 +39,6 @@ namespace kayip_project.Areas.Identity.Pages.Account
         }
         public string RecaptchaSiteKey => _configuration["reCAPTCHA:SiteKey"];
         public string RecaptchaSecreteKey => _configuration["reCAPTCHA:SecretKey"];
-
-
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.

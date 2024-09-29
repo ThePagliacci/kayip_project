@@ -66,6 +66,11 @@ namespace kayip_project.Areas.Customer.Controllers
         [HttpPost]
         public IActionResult Upsert(Post post, IFormFile? file)
         {
+            if (file == null && post.Image == null)
+            {
+                ModelState.AddModelError("Image", "Bu alanın doldurulması zorunludur");
+            }
+            
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
@@ -95,7 +100,6 @@ namespace kayip_project.Areas.Customer.Controllers
                     }
                     post.Image = Path.Combine("images", "post", fileName).Replace("\\", "/");
                 }
-
                 post.Latitude = post.Latitude; 
                 post.Longitude = post.Longitude; 
                 if (post.Id == 0)
@@ -106,6 +110,7 @@ namespace kayip_project.Areas.Customer.Controllers
                 {
                     _unitOfWork.Post.Update(post);
                 }
+
                 _unitOfWork.Save();
                 return RedirectToAction("Index", "Home");
             }

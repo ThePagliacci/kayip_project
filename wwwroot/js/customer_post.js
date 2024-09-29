@@ -7,6 +7,7 @@ function Delete(url) {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Evet, kaldır!",
+      cancelButtonText: "Hayır, iptal et!"
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({

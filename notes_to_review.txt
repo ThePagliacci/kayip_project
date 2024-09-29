@@ -1,12 +1,8 @@
-            ***************** TECHNİQAL İSSUES SOLVED WHEN DEPLOYİNG *******************
-* the website (google) authorized login and register & recaptcha redirect url should be updated
-* user secrets
-*connection string security?
-* private policy and terms of services links to page needs to be updated
-*- I'm not a robot in mobile version isn't clickable?
-*-client side validation for terms and services
-*- server side validation's message for recaptch is unable to be displayed
+1. the website (google) authorized login and register & recaptcha redirect url should be updated
+2. connection string security?
+3. private policy and terms of services links to page needs to be updated
+4. I'm not a robot in mobile version isn't clickable?
+5. client side validation for terms and services
+6. server side validation's message for recaptch is unable to be displayed
 
-            ***************** STYLİNG *******************
-5- mobile verison of navbar items, I don't like the styling
-67- posts' styling and size
+

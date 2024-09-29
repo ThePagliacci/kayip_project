@@ -22,6 +22,7 @@ namespace kayip_project.Models
         [Display(Name = "Contact Info")]
         public string ContactInfo { get; set; }
         [ValidateNever]
+        [Required(ErrorMessage = "Bu alanın doldurulması zorunludur" )]
         public string Image { get; set; }
 
         [Required(ErrorMessage = "Bu alanın doldurulması zorunludur" )]

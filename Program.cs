@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using AspNetCore.ReCaptcha;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddHttpsRedirection(options =>
 {
@@ -53,8 +54,10 @@ services.AddAuthentication().AddGoogle(GoogleOptions =>
     GoogleOptions.ClientId = configuration["Authentication:Google:ClientId"];
     GoogleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
 });
-
-builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
+services.AddRazorPages();
+    
+// Add ReCaptcha
+services.AddReCaptcha(configuration.GetSection("ReCaptcha"));
 
 //cookie time out
 services.ConfigureApplicationCookie(options =>
@@ -92,7 +95,10 @@ app.Run();
 void ReplacePlaceholdersWithSecrets(IConfiguration configuration)
 {
     var recaptchaSection = configuration.GetSection("ReCaptcha");
-
-    recaptchaSection["SiteKey"] = configuration["ReCaptcha:SiteKey"] ?? recaptchaSection["SiteKey"];
-    recaptchaSection["SecretKey"] = configuration["ReCaptcha:SecretKey"] ?? recaptchaSection["SecretKey"];
+    
+    // Fetching from environment variables
+    recaptchaSection["SiteKey"] = Environment.GetEnvironmentVariable("reCAPTCHA:SiteKey") 
+        ?? recaptchaSection["SiteKey"];
+    recaptchaSection["SecretKey"] = Environment.GetEnvironmentVariable("reCAPTCHA:SecretKey") 
+        ?? recaptchaSection["SecretKey"];
 }

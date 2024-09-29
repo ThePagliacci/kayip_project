@@ -61,7 +61,7 @@ h6 {
   margin-top: 20px;
   display: inline-block;
   border: 1px solid #000;
-  padding: 10px 15px;
+  padding: 0.625rem 15px;
   /**font-size: 0.75rem;**/
   text-transform: uppercase;
   color: #000;
@@ -95,8 +95,8 @@ h6 {
   border-radius: 0;
   background: #ebecec;
   border: 1px solid transparent;
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+  padding-top: 0.625rem !important;
+  padding-bottom: 0.625rem !important;
 }
 
 .form-control:active,
@@ -112,7 +112,7 @@ h6 {
   color: #333;
   font-weight: 500;
   display: block;
-  margin-top: 10px;
+  margin-top: 6.25rem 1.25rem;
 }
 
 /*contact us page*/
@@ -326,11 +326,11 @@ h6 {
 /*gonderlerim*/
 
 .card-icons {
-  position: absolute;
-  top: 10px;
-  right: 10px; /* Position the icons at the top-right corner */
-  display: flex;
-  gap: 10px;
+  position:absolute;
+  display: block;
+  top: 0.625rem;
+  right: 0.625rem; /* Position the icons at the top-right corner */
+  gap: 0.625rem;
 }
 
 .card-icons a {
@@ -344,19 +344,23 @@ h6 {
   flex-direction: row;
   background-color: white; /* Initial background color */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial subtle shadow */
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Initial subtle shadow */
 }
 .card:hover {
   transform: scale(1.01); /* Slightly scale up the card */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+.card-body
+{
+  padding: 0.5rem;
 }
 
 .card-img-top {
-  padding: 20px;
+  padding: 1.25rem;
   max-width: 20%;
 }
 .index-image {
-  padding: 20px;
+  padding: 0.625rem;
   max-width: 50%;
 }
 /*upsert*/
@@ -373,14 +377,14 @@ h6 {
 /*what to do page */
 /* General styling for accordion columns */
 .my-accordion-column {
-  margin-top: 10px;
-  padding-left: 15px;
+  margin-top: 0.625rem;
+  padding-left: 0.938rem;
 }
 
 /* Styling for the accordion */
 .my-accordion {
   margin-bottom: 14%;
-  padding: 10px;
+  padding: 0.625rem;
 }
 
 /* Styling for accordion buttons when not collapsed */
@@ -400,7 +404,7 @@ h6 {
 
 /* General styling for accordion buttons */
 .accordion-button {
-  padding: 25px 20px;
+  padding: 1.563rem 1.25rem;
   color: #000;
   background-color: #fff;
   /**font-size: 1.25rem;**/
@@ -410,7 +414,7 @@ h6 {
 /* Hover effect for accordion buttons */
 .accordion-button:hover {
   transform: scale(1.01); /* Slightly scale up the card */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
 }
 
 /* Styling for accordion body */
@@ -431,14 +435,14 @@ h6 {
 }
 .accordion-body li.neyapmaliyim {
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   color: #c00;
 }
 
 /* Styling for span elements within the accordion body */
 .accordion-body span {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   /**font-size: 1rem;**/
   color: #555;
   margin-left: 20px;
